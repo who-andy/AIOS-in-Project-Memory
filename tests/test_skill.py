@@ -15,13 +15,13 @@ class SkillContractTests(unittest.TestCase):
     def test_valid_agent_skills_frontmatter(self):
         self.assertTrue(self.front.startswith("---\n"))
         metadata = dict(re.findall(r"(?m)^(name|description|license|compatibility):\s*(.*)$", self.front))
-        self.assertEqual(metadata["name"], "adaptive-project-memory")
+        self.assertEqual(metadata["name"], "aios-in-project-memory")
         self.assertRegex(metadata["name"], r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
         self.assertLessEqual(len(metadata["name"]), 64)
         self.assertGreater(len(metadata["description"]), 10)
         self.assertLessEqual(len(metadata["description"]), 1024)
         self.assertLessEqual(len(metadata["compatibility"]), 500)
-        self.assertIn('version: "0.4.1"', self.front)
+        self.assertIn('version: "0.4.2"', self.front)
         self.assertLessEqual(len(self.body.splitlines()), 500)
 
     def test_required_runtime_contract(self):
@@ -89,6 +89,13 @@ class SkillContractTests(unittest.TestCase):
         for p in ROOT.rglob("*"):
             forbidden = {".env", "node_modules", "__pycache__"} if p.is_file() else {".env", "node_modules"}
             self.assertNotIn(p.name, forbidden)
+
+    def test_public_skill_name_matches_repository(self):
+        import re
+        name = re.search(r"(?m)^name: ([^\\s]+)$", self.front)
+        self.assertIsNotNone(name)
+        self.assertEqual(name.group(1), "aios-in-project-memory")
+        self.assertNotIn("adaptive-project-memory", self.content)
 
     def test_local_project_memory_is_primary_goal(self):
         self.assertIn("local project folder", self.content)
