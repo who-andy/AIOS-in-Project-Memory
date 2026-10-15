@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.2 (2026-10-15)
+
+- Renamed the Agent Skill identifier to `aios-in-project-memory` to match the GitHub repository.
+- Updated example invocations, tests, and README migration notes. No changes required to existing project memory files.
+
 ## 0.4.1 (2026-10-15)
 
 - Rewrote English and Chinese READMEs around the primary use case: AI creates and updates memory files in the local project directory, and later sessions or different AI agents resume from those files.
