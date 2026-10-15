@@ -41,21 +41,25 @@ For example, after several weeks of studying, the project might have a short ent
 
 **Discuss first, initialize when ready**
 
-> We've discussed this project enough. Use adaptive-project-memory to create and maintain long-term memory files in this local project folder. Decide what files are needed yourself.
+> We've discussed this project enough. Use aios-in-project-memory to create and maintain long-term memory files in this local project folder. Decide what files are needed yourself.
 
 **Save important details while brainstorming**
 
-> Use adaptive-project-memory to capture important discussion details in this project folder while we brainstorm. We'll initialize the full memory system when I'm ready.
+> Use aios-in-project-memory to capture important discussion details in this project folder while we brainstorm. We'll initialize the full memory system when I'm ready.
 
 **Already halfway through a project**
 
-> I've already worked on this project across several chats. Use adaptive-project-memory to recover my current progress from the history and files you can access, build local project memory, and help me continue from here.
+> I've already worked on this project across several chats. Use aios-in-project-memory to recover my current progress from the history and files you can access, build local project memory, and help me continue from here.
 
 ## What gets remembered?
 
 Whatever is useful for the **next conversation to continue accurately**: goals, current progress, verified results, decisions and their reasons, mistakes, corrections, unresolved questions, and the next step.
 
 The AI keeps a short starting point for fast recovery and more detailed history for when it's needed. It distinguishes confirmed facts from ideas and unverified claims. Old notes can be imported later if a project started before the Skill was installed.
+
+## Renaming from the earlier Skill
+
+If you previously installed the older `adaptive-project-memory` Skill, remove that old installation using your agent's Skill manager or delete its old Skill folder after installing this version. This prevents duplicate Skill entries. Existing **project memory files should be left intact**.
 
 ## Requirements and limitations
 
