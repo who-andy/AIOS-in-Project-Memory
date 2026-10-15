@@ -90,6 +90,17 @@ class SkillContractTests(unittest.TestCase):
             forbidden = {".env", "node_modules", "__pycache__"} if p.is_file() else {".env", "node_modules"}
             self.assertNotIn(p.name, forbidden)
 
+    def test_readme_language_switch_and_cli_install(self):
+        command = "npx skills add who-andy/AIOS-in-Project-Memory"
+        language_switch = "[English](README.md) | [简体中文](README.zh-CN.md)"
+        for filename in ("README.md", "README.zh-CN.md"):
+            with self.subTest(filename=filename):
+                content = (ROOT / filename).read_text(encoding="utf-8")
+                self.assertTrue(content.startswith(language_switch))
+                self.assertIn(command, content)
+                self.assertIn(command + " -g", content)
+                self.assertIn(command + " --list", content)
+
     def test_documentation_covers_discussion_and_capture(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         cn = (ROOT / "README.zh-CN.md").read_text(encoding="utf-8")
