@@ -21,7 +21,7 @@ class SkillContractTests(unittest.TestCase):
         self.assertGreater(len(metadata["description"]), 10)
         self.assertLessEqual(len(metadata["description"]), 1024)
         self.assertLessEqual(len(metadata["compatibility"]), 500)
-        self.assertIn('version: "0.3.0"', self.front)
+        self.assertIn('version: "0.4.0"', self.front)
         self.assertLessEqual(len(self.body.splitlines()), 500)
 
     def test_required_runtime_contract(self):
@@ -48,6 +48,26 @@ class SkillContractTests(unittest.TestCase):
             "the host made it inaccessible", "do not silently start recording",
             "do not silently discard evidence",
         ]:
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, self.content.lower())
+
+    def test_retrospective_onboarding_contract(self):
+        required = [
+            "retroactive onboarding",
+            "detect this situation proactively",
+            "actually accessible",
+            "multiple",
+            "reconstruct progressively",
+            "source-linked project timeline",
+            "calibrate confidence and coverage",
+            "partially inspected",
+            "bootstrap from the real present",
+            "continue backfill safely",
+            "do not repeatedly re-import",
+            "do not upload past conversations",
+            "continue from the user's actual present position",
+        ]
+        for phrase in required:
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, self.content.lower())
 
