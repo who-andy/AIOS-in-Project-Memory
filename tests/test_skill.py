@@ -21,7 +21,7 @@ class SkillContractTests(unittest.TestCase):
         self.assertGreater(len(metadata["description"]), 10)
         self.assertLessEqual(len(metadata["description"]), 1024)
         self.assertLessEqual(len(metadata["compatibility"]), 500)
-        self.assertIn('version: "0.4.0"', self.front)
+        self.assertIn('version: "0.4.1"', self.front)
         self.assertLessEqual(len(self.body.splitlines()), 500)
 
     def test_required_runtime_contract(self):
@@ -89,6 +89,16 @@ class SkillContractTests(unittest.TestCase):
         for p in ROOT.rglob("*"):
             forbidden = {".env", "node_modules", "__pycache__"} if p.is_file() else {".env", "node_modules"}
             self.assertNotIn(p.name, forbidden)
+
+    def test_local_project_memory_is_primary_goal(self):
+        self.assertIn("local project folder", self.content)
+        self.assertIn("new chat or a different AI", self.content)
+        english = (ROOT / "README.md").read_text(encoding="utf-8")
+        chinese = (ROOT / "README.zh-CN.md").read_text(encoding="utf-8")
+        self.assertIn("local project", english.lower())
+        self.assertIn("local project folder", english.lower())
+        self.assertIn("本地项目目录", chinese)
+        self.assertIn("更换 AI", chinese)
 
     def test_readme_language_switch_and_cli_install(self):
         command = "npx skills add who-andy/AIOS-in-Project-Memory"
