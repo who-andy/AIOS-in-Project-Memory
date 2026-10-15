@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.1 (2026-10-15)
+
+- Rewrote English and Chinese READMEs around the primary use case: AI creates and updates memory files in the local project directory, and later sessions or different AI agents resume from those files.
+- Made local project storage and cross-AI recovery explicit in core Skill instructions.
+- Added contract tests for the user-facing description and the project-folder focus.
+
 ## 0.4.0 (2026-10-15)
 
 - Added retrospective onboarding for learning and software projects that began before the memory system was installed.
