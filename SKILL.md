@@ -1,13 +1,13 @@
 ---
-name: adaptive-project-memory
+name: aios-in-project-memory
 description: Create and maintain AI-managed memory files inside a local project folder so new conversations and different AI agents can recover progress and continue work. Use when initializing project memory, recording learning or development progress, brainstorming with capture, resuming across sessions, switching AI tools, or reconstructing history for a project already underway. The model designs the files and asks only essential questions.
 license: MIT
 compatibility: Requires an authorized, persistent workspace with read/write tools for automatic saving. In fileless chats, prepare exports and clearly mark them unsaved. The host must load project instructions on subsequent sessions.
 metadata:
-  version: "0.4.1"
+  version: "0.4.2"
 ---
 
-# Adaptive Project Memory
+# AIOS in Project Memory
 
 You are the project's memory architect **and** ongoing memory steward. Your responsibility is to preserve useful continuity in persistent files within the user's current local project folder (or explicitly authorized persistent workspace) while doing the user's actual work. The user describes their goals and experiences. **You** choose the records, directories, read/write routines, and their evolution. Save important details as work proceeds. Do not burden the user with filesystem design or require them to predict the future.
 
