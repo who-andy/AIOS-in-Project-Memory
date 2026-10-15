@@ -1,10 +1,10 @@
 ---
 name: adaptive-project-memory
-description: Design and continuously maintain portable memory for long-running projects. Use when the user wants to brainstorm with capture, initialize a project, continue work across sessions, preserve learning or development progress, migrate between AI agents, audit conflicting notes, or prevent important context from being lost. Ask only consequential user-facing questions, then autonomously create and maintain suitable project instructions and records.
+description: Design and continuously maintain portable memory for long-running projects. Use when the user wants to brainstorm with capture, initialize a project, continue work across sessions, preserve learning or development progress, migrate between AI agents, audit conflicting notes, or reconstruct an already-running project from previous conversations, learning records, code, and other accessible sources without restarting the work. Ask only consequential user-facing questions, then autonomously create and maintain suitable project instructions and records.
 license: MIT
 compatibility: Requires an authorized, persistent workspace with read/write tools for automatic saving. In fileless chats, prepare exports and clearly mark them unsaved. The host must load project instructions on subsequent sessions.
 metadata:
-  version: "0.3.0"
+  version: "0.4.0"
 ---
 
 # Adaptive Project Memory
@@ -24,16 +24,35 @@ Interpret natural language. Support all of these without making the user learn m
 - **Explore:** ordinary discussion. If capture has not been requested or enabled, discuss normally and do not silently start recording.
 - **Explore with capture:** freely brainstorm while saving meaningful details in a **provisional, nonbinding** record. Do not prematurely initialize the final project structure.
 - **Initialize:** when the user explicitly approves startup, use prior accessible conversation and provisional notes to create a useful minimal project memory system when the user officially initiates it.
+- **Retroactive onboarding / backfill:** when an existing course, software project, research effort, or other endeavor began before memory was enabled, reconstruct its current state and valuable history from accessible evidence without resetting progress.
 - **Operate / resume:** work on the actual learning, coding, research, or other task while reading and updating the relevant project memory.
 - **Audit / evolve / migrate:** improve memory quality, safely reorganize, or create a handoff for another session or AI platform.
 
 If the user asks to initialize immediately, proceed with reversible assumptions rather than an endless interview. If they want to discuss first, let them discuss. **Do not require a second interview about facts already provided.** Capture may be enabled at the start of brainstorming without freezing decisions.
 
+## Retroactive onboarding: join an existing project midstream
+
+**Detect this situation proactively.** Signs include "I am halfway through", "we already discussed this in other chats", months of previous study, existing code or notes, prior examinations, Git history, or a partially completed plan. A project may have extensive work but no organized memory. Distinguish that from an initialized project with a working memory system. When the user asks to set up memory for work already underway, activate retrospective reconstruction as part of initialization; do not force them to restart or know a special mode name.
+
+**1. Discover what is actually accessible.** First inspect the authorized current conversation, existing project files and instructions, available documents and exports, repositories, learning results, and any genuinely connected or accessible conversation history. Determine whether each source is primary, a dated summary, or hearsay. A prior chat mentioned by the user is *not* automatically available. Never claim to read account-wide chats, app histories, or attachments that the host cannot access. Do not request an export until checking available sources, and do not force users to supply every past chat. If essential sources remain inaccessible, ask only for a relevant summary, excerpt, or export that the user can provide.
+
+**2. Reconstruct progressively.** Analyze existing material in manageable batches where needed. Deduplicate repeated extracts. Derive a dated, source-linked project timeline; recover objectives, constraints, previous decisions and rejected options, actual accomplishments, errors and corrections, evaluated outcomes, unresolved work, and the latest evidenced checkpoint. Keep precise source pointers when available. Do not assume the most recent-looking AI summary is authoritative; compare it with evidence and chronology. For study, record which skills were taught, practiced with assistance, or independently demonstrated. For development, verify plans against existing code, commits, tests, and deployment evidence.
+
+**3. Calibrate confidence and coverage.** Explicitly separate verified facts, user-reported statements, inferred hypotheses, and unknown or conflicting history. Track which relevant sources or periods were inspected, partially inspected, unavailable, or not yet reviewed, using whatever compact record the model finds appropriate. Do not claim complete historical recovery or an exact mastery level from partial evidence. Identify disagreements, superseded decisions, and important gaps. Ask one high-impact question when the available sources cannot resolve a consequential conflict or identify the current next step. Avoid a lengthy retrospective interview.
+
+**4. Bootstrap from the real present.** Initialize the minimal, model-designed project memory using the best-supported *current* state, with retrievable historical reasons and explicit uncertainty. Keep normal work moving even if the historical import is incomplete. If prior memory files already exist, incorporate them non-destructively and respect their established source-of-truth conventions. The user's confirmed present-day correction can update current status while preserving what earlier records said.
+
+**5. Continue backfill safely.** If more material becomes available, ingest only new or previously unreviewed material, checkpoint import progress to avoid duplication, reconcile newly discovered evidence, and update the current state only when justified. Preserve source origin and meaning. Do not repeatedly re-import every transcript or overwrite confirmed recent work with older history.
+
+**6. Respect privacy and authorization.** Historical chats can contain unrelated or sensitive data. Read only what is authorized and relevant; extract the information needed for continuity instead of copying entire transcripts by default. Do not upload past conversations, assessments, private notes, or user project memory to a public repository without explicit authorization.
+
+The success criterion is that the next session can **continue from the user's actual present position**, knows what was recovered versus missing, and can gradually enrich history without making the user start over.
+
 ## The loop: understand → work → persist → verify
 
 ### 1. Recover context and evaluate what is missing
 
-Examine the accessible conversation, authorized files, and real project artifacts. Inspect existing instruction files before editing them. Distinguish:
+Examine the accessible conversation, authorized files, and real project artifacts. Inspect existing instruction files before editing them. If this project is already in progress, apply the retroactive onboarding procedure above and clearly mark unavailable historical sources. Distinguish:
 
 - **Verified:** checked against primary evidence, code, tests, official documentation, or an authoritative record.
 - **User-reported:** stated by the user, attributed without embellishment.
@@ -69,6 +88,7 @@ The generated entrypoint must be **project-specific**, short enough to load ever
 5. After each persistence step, check that writes succeeded and links remain usable. If writing failed, disclose the gap and surface a recoverable, unsaved checkpoint; do not claim autosave.
 6. Before dangerous or broad file changes, inspect, back up, and get approval where needed. Never capture credentials or unnecessary personal/sensitive details.
 7. Explain how subsequent agents and other platforms can find and continue this system, including the required instructions loading behavior.
+8. If work predates the memory system, explain where reconstruction coverage and unresolved historical gaps are recorded, so future agents can extend backfill without undoing recent progress.
 
 **This entrypoint is the ongoing reminder.** The main `SKILL.md` teaches models to build the system; the generated project entrypoint is responsible for making persistence discoverable in later sessions. Do not rely on the Skill being invoked on every future turn. Avoid recursive instructions that load the entire Skill or all histories each turn.
 
@@ -84,7 +104,7 @@ For exploratory dialogue, save a lightweight dated journal and provisional check
 
 ### 6. Resume with selective retrieval
 
-In a fresh session: read the automatically loaded project instructions, find the current checkpoint, identify the user's actual next task, then read only the topical notes and source material required. Correct stale state using current evidence. Continue the user's task, rather than merely presenting a memory summary. After work, save verified changes and a precise next step.
+In a fresh session: read the automatically loaded project instructions, find the current checkpoint, identify the user's actual next task, then read only the topical notes and source material required. Correct stale state using current evidence. If historical reconstruction is incomplete, continue the current task and revisit old sources only when relevant or newly available. Continue the user's task, rather than merely presenting a memory summary. After work, save verified changes and a precise next step.
 
 For education: distinguish introduced / practiced with help / independently demonstrated / due for review, and record evidence of assessment. For software: distinguish planned / implemented / tested / deployed and retain exact verification commands and outcomes. For research: separate claims, sources, confidence, and open questions. These are **validation examples**, never compulsory document templates.
 
