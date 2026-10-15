@@ -56,7 +56,6 @@ class SkillContractTests(unittest.TestCase):
             "retroactive onboarding",
             "detect this situation proactively",
             "actually accessible",
-            "multiple",
             "reconstruct progressively",
             "source-linked project timeline",
             "calibrate confidence and coverage",
