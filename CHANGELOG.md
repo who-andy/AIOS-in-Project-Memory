@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.0 (2026-10-15)
+
+- Added retrospective onboarding for learning and software projects that began before the memory system was installed.
+- Added source inventory, incremental historical reconstruction, evidence reconciliation, and partial recovery tracking.
+- Preserved current progress while historical records are imported in stages.
+- Documented limitations for inaccessible earlier sessions and private materials.
+
 ## 0.3.0 (2026-10-15)
 
 - Rebuilt as a prompt-first Skill with a single authoritative `SKILL.md`.
