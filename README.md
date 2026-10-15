@@ -1,6 +1,6 @@
 # AIOS in Project Memory
 
-**Adaptive Project Memory v0.3.0** is a prompt-first Agent Skill for persistent project memory.
+**Adaptive Project Memory v0.4.0** is a prompt-first Agent Skill for persistent project memory.
 
 The Skill teaches an AI agent to ask useful questions, autonomously design project-specific files, and preserve decisions, progress, corrections and evidence during work. The project-specific `AGENTS.md`, `CLAUDE.md`, or equivalent entrypoint is created by the model, not prescribed in a fixed template.
 
@@ -11,6 +11,12 @@ The Skill teaches an AI agent to ask useful questions, autonomously design proje
 3. **Initialize now.** Say: "Initialize a persistent memory system for this project. Ask only questions that materially affect your design."
 
 To resume, open the project in a host that loads its generated entrypoint, recover the current checkpoint, perform the work, and save material updates as they occur.
+
+## Join a project already underway
+
+A project might have months of study sessions or development work before the Skill is added. Say: "Use adaptive-project-memory to reconstruct my existing project progress from the materials available to you, and initialize long-term memory without restarting."
+
+The agent checks relevant materials it can access, rebuilds the current state with evidence, records gaps, and continues working. More records can be added later without duplicating old imports. Historical sessions outside the host's accessible context must be supplied or connected before they can be included.
 
 ## Install
 
