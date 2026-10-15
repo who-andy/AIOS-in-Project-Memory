@@ -92,7 +92,7 @@ class SkillContractTests(unittest.TestCase):
 
     def test_public_skill_name_matches_repository(self):
         import re
-        name = re.search(r"(?m)^name: ([^\\s]+)$", self.front)
+        name = re.search(r"(?m)^name: ([a-z0-9-]+)$", self.front)
         self.assertIsNotNone(name)
         self.assertEqual(name.group(1), "aios-in-project-memory")
         self.assertNotIn("adaptive-project-memory", self.content)
