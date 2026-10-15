@@ -1,19 +1,19 @@
 ---
 name: adaptive-project-memory
-description: Design and continuously maintain portable memory for long-running projects. Use when the user wants to brainstorm with capture, initialize a project, continue work across sessions, preserve learning or development progress, migrate between AI agents, audit conflicting notes, or reconstruct an already-running project from previous conversations, learning records, code, and other accessible sources without restarting the work. Ask only consequential user-facing questions, then autonomously create and maintain suitable project instructions and records.
+description: Create and maintain AI-managed memory files inside a local project folder so new conversations and different AI agents can recover progress and continue work. Use when initializing project memory, recording learning or development progress, brainstorming with capture, resuming across sessions, switching AI tools, or reconstructing history for a project already underway. The model designs the files and asks only essential questions.
 license: MIT
 compatibility: Requires an authorized, persistent workspace with read/write tools for automatic saving. In fileless chats, prepare exports and clearly mark them unsaved. The host must load project instructions on subsequent sessions.
 metadata:
-  version: "0.4.0"
+  version: "0.4.1"
 ---
 
 # Adaptive Project Memory
 
-You are the project's memory architect **and** ongoing memory steward. Your responsibility is to preserve useful continuity while doing the user's actual work. The user describes their goals and experiences. **You** choose the records, directories, read/write routines, and their evolution. Save important details as work proceeds. Do not burden the user with filesystem design or require them to predict the future.
+You are the project's memory architect **and** ongoing memory steward. Your responsibility is to preserve useful continuity in persistent files within the user's current local project folder (or explicitly authorized persistent workspace) while doing the user's actual work. The user describes their goals and experiences. **You** choose the records, directories, read/write routines, and their evolution. Save important details as work proceeds. Do not burden the user with filesystem design or require them to predict the future.
 
 ## The outcome that matters
 
-A capable fresh agent, with access only to the authorized project files, must be able to identify the project's purpose, current position, binding decisions, unresolved questions, relevant evidence, and next useful step. It must know **how to keep the memory current during ordinary work**, without the original conversation. Preserve the important causal details in retrievable history; keep startup context small. Correctness and recoverability outrank the appearance of an elaborate structure.
+The primary user-facing outcome is simple: the AI creates project memory files locally, updates meaningful progress during conversations, and lets a new chat or a different AI resume by reading those same files. A capable fresh agent, with access only to the authorized project files, must be able to identify the project's purpose, current position, binding decisions, unresolved questions, relevant evidence, and next useful step. It must know **how to keep the memory current during ordinary work**, without the original conversation. Preserve the important causal details in retrievable history; keep startup context small. Correctness and recoverability outrank the appearance of an elaborate structure.
 
 This Skill is a set of instructions, **not** an always-on service, background recorder, persistence mechanism, or guarantee against crashes. Continuous writes are possible only when this Skill or generated always-loaded project instructions actually guide the agent and the agent can write to an authorized persistent workspace. Never claim files were saved before checking. Never claim a conversation is preserved if the host made it inaccessible before capture.
 
@@ -71,7 +71,7 @@ Do **not** ask the user to choose `progress.md`, JSON, agent role counts, a fold
 
 Reason from how this specific project uses information. What is stable? What changes frequently? What must be kept as dated evidence? What would future agents need immediately? What can remain on demand? Which files already serve as authoritative sources? What costs more to lose than to store? How can progress actually be verified?
 
-Choose a **minimal and revisable** human-readable structure. You may choose any appropriate filenames and organization. A long-running study program, app codebase, personal plan, and research project should emerge differently. Avoid speculative empty files and duplicated truths. Keep a short entrypoint, compact current checkpoint, and sufficiently detailed retrievable history **as functions**, whether implemented in one file or several. Save meaningful rejected directions and *why* they were rejected when this will prevent future repetition. Don't dump entire conversations by default.
+Use the existing local project folder as the default memory home when authorized and writable. For a new learning or research project, establish the smallest practical local project folder when needed; do not invent external services or centralize memory by default. Choose a **minimal and revisable** human-readable structure. You may choose any appropriate filenames and organization. A long-running study program, app codebase, personal plan, and research project should emerge differently. Avoid speculative empty files and duplicated truths. Keep a short entrypoint, compact current checkpoint, and sufficiently detailed retrievable history **as functions**, whether implemented in one file or several. Save meaningful rejected directions and *why* they were rejected when this will prevent future repetition. Don't dump entire conversations by default.
 
 For each durable record, make its purpose, authority, read condition, and update condition discoverable. For projects with existing conventions, adapt to them instead of introducing competing sources of truth.
 
@@ -104,7 +104,7 @@ For exploratory dialogue, save a lightweight dated journal and provisional check
 
 ### 6. Resume with selective retrieval
 
-In a fresh session: read the automatically loaded project instructions, find the current checkpoint, identify the user's actual next task, then read only the topical notes and source material required. Correct stale state using current evidence. If historical reconstruction is incomplete, continue the current task and revisit old sources only when relevant or newly available. Continue the user's task, rather than merely presenting a memory summary. After work, save verified changes and a precise next step.
+In a fresh session or a switch to another AI tool working in the same local project folder: use the host-loaded or explicitly supplied project instructions, find the current checkpoint, identify the user's actual next task, then read only the topical notes and source material required. If the new tool cannot access the folder or does not automatically load its instructions, explain the needed file access or startup step before claiming continuity. Correct stale state using current evidence. If historical reconstruction is incomplete, continue the current task and revisit old sources only when relevant or newly available. Continue the user's task, rather than merely presenting a memory summary. After work, save verified changes and a precise next step.
 
 For education: distinguish introduced / practiced with help / independently demonstrated / due for review, and record evidence of assessment. For software: distinguish planned / implemented / tested / deployed and retain exact verification commands and outcomes. For research: separate claims, sources, confidence, and open questions. These are **validation examples**, never compulsory document templates.
 
