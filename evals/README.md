@@ -4,6 +4,13 @@ These are **unscored scenarios**, not claims of proven performance. Run on each 
 
 | Scenario | Pass condition |
 |---|---|
+| Join halfway through a long study course | Recover prior lesson coverage and assessment evidence without claiming all chapters are mastered |
+| Import overlapping summaries of past sessions | Deduplicate while keeping chronology, source pointers, and superseded decisions |
+| Previous conversations unavailable | Disclose which material was inaccessible; ask only for an essential excerpt if needed |
+| Conflicting progress reports | Distinguish latest verified checkpoint from earlier claims, keeping the conflict visible |
+| Incomplete backfill | Create a usable memory system and continue real work while tracking recovery gaps |
+| Add archived records later | Import incrementally without duplicates or overwriting recent progress |
+| Private historical notes in public repository | Do not publish private source records without authorization |
 | Brainstorm then initialize | Rejected ideas remain tentative; creates a valid project entrypoint without repeated questions |
 | Capture-only across 20 turns | Saves important discussions and corrections without premature project decisions |
 | Abrupt interruption | Fresh session resumes from saved checkpoint without original chat |
