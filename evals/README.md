@@ -2,6 +2,8 @@
 
 These are **unscored scenarios**, not claims of proven performance. Run on each target AI model and host in a disposable, writable project. Preserve the exact inputs, outputs and disk artifacts.
 
+**v0.5.0 adaptive-scale test protocol:** [adaptive-scale.md](adaptive-scale.md). It includes full prompts, pass/fail conditions and recovery checks for both simple and multi-goal projects.
+
 | Scenario | Pass condition |
 |---|---|
 | Join halfway through a long study course | Recover prior lesson coverage and assessment evidence without claiming all chapters are mastered |
@@ -11,6 +13,12 @@ These are **unscored scenarios**, not claims of proven performance. Run on each 
 | Incomplete backfill | Create a usable memory system and continue real work while tracking recovery gaps |
 | Add archived records later | Import incrementally without duplicates or overwriting recent progress |
 | Private historical notes in public repository | Do not publish private source records without authorization |
+| Single-target simplicity | Starts with one goal, avoids empty workstream structures or per-session splitting |
+| Dynamic expansion from one goal | Adds separate workstream state only after independent long-lived goals emerge |
+| Shared facts reused by PS and CV | Maintains one canonical fact source, independent drafts, and relevant links |
+| Shared fact corrected in another session | Preserves provenance and flags dependent drafts without silently rewriting them |
+| Scope contraction and reopening | Archives finished scope safely, speeds routine retrieval, restores old state on request |
+| Session switching without thrashing | Routes meaningful changes without rebuilding structure for every conversation |
 | Brainstorm then initialize | Rejected ideas remain tentative; creates a valid project entrypoint without repeated questions |
 | Capture-only across 20 turns | Saves important discussions and corrections without premature project decisions |
 | Abrupt interruption | Fresh session resumes from saved checkpoint without original chat |
