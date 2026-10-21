@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.5.0 (2026-10-21)
+
+- Added **Complexity on Demand**: minimal memory for a single goal, selective expansion only when real independent deliverables emerge.
+- Introduced shared project knowledge plus isolated workstream state, with one authoritative source for reusable facts and independent drafts.
+- Added adaptive contraction, archiving and safe consolidation when goals finish or are explicitly removed, without deleting recoverable history.
+- Added source-aware propagation of factual corrections, with dependent drafts flagged for review rather than silently rewritten.
+- Tightened scoped retrieval, non-destructive migration, version checks and concurrency safeguards.
+- Added an eight-scenario behavioral protocol and deterministic contract tests covering minimal startup, growth, shrinkage, cross-session continuity and failure cases.
+- Deferred optional host-specific Hooks and integrations to separate work; no new runtime dependencies or fixed project templates.
+
 ## 0.4.2 (2026-10-15)
 
 - Renamed the Agent Skill identifier to `aios-in-project-memory` to match the GitHub repository.
