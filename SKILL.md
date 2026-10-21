@@ -1,10 +1,10 @@
 ---
 name: aios-in-project-memory
-description: Create and maintain AI-managed memory files inside a local project folder so new conversations and different AI agents can recover progress and continue work. Use when initializing project memory, recording learning or development progress, brainstorming with capture, resuming across sessions, switching AI tools, or reconstructing history for a project already underway. The model designs the files and asks only essential questions.
+description: Create and maintain AI-managed memory files inside a local project folder so new conversations and different AI agents can recover progress and continue work. Use when initializing project memory, recording learning or development progress, brainstorming with capture, resuming across sessions, switching AI tools, or reconstructing history for a project already underway. Scale memory structure up or down only as actual needs change; keep single-goal projects minimal. The model designs the files and asks only essential questions.
 license: MIT
 compatibility: Requires an authorized, persistent workspace with read/write tools for automatic saving. In fileless chats, prepare exports and clearly mark them unsaved. The host must load project instructions on subsequent sessions.
 metadata:
-  version: "0.4.2"
+  version: "0.5.0"
 ---
 
 # AIOS in Project Memory
@@ -75,6 +75,29 @@ Use the existing local project folder as the default memory home when authorized
 
 For each durable record, make its purpose, authority, read condition, and update condition discoverable. For projects with existing conventions, adapt to them instead of introducing competing sources of truth.
 
+## Adaptive scale: one project, as many scopes as needed
+
+**Complexity on demand.** Start small. A single goal should have one coherent current state and only the records truly needed; a tiny project may fit in one file plus any host-required entrypoint. **Never create a workstream, folder, index, role, or integration just because a new chat starts.** Do not plan hypothetical future tasks. When uncertain, save valuable information without adding structure. Optimize for accurate recovery with the least ongoing reading, writing, and maintenance.
+
+**Recognize scope by meaning, not by chat window.** A project may have several ongoing deliverables; one workstream may span many sessions, and one session may affect several workstreams. Infer the user's present goal from their task and existing records. If only one meaningful goal exists, treat the project as one scope. Do not require the user to choose names, hierarchy, or labels. Ask a brief question only when misrouting would materially change or endanger work.
+
+**Route memory to its natural authority.** On each consequential write, distinguish:
+- **Shared project knowledge:** reusable facts, source evidence, constraints, validated activities, overarching goals and cross-cutting decisions. Store once in a discoverable canonical record when practical.
+- **Workstream-specific state:** its drafts, writing style, decisions, progress, open issues, and next step. Keep independent only when there is a demonstrated need for separately evolving state.
+- **Provisional or disputed material:** options, hypotheses, unverified statements, rejected approaches, and conflicts. Preserve appropriate provenance and status; do not silently promote to shared verified fact.
+
+A shared fact can support several workstreams without copying multiple authoritative versions. Link or point to it from workstream notes as useful. **Keep fact, interpretation, and drafted wording distinct:** the same experience can support a CV bullet and a personal statement narrative without making either document the canonical factual source.
+
+**Expand only for real complexity.** Split a workstream, create a shared record, or add a new index only when separate long-lived goals, repeated relevant retrieval, conflicting update needs, or meaningful context costs justify it. If a lightweight section or link solves the problem, prefer that. Explain major restructuring briefly; don't interrupt ordinary work with filesystem questions.
+
+**Contract safely as needs decrease.** When a deliverable is confirmed complete, a goal is explicitly removed, or independent scopes no longer provide value, archive or consolidate redundant *active* state to simplify future startup. Mere silence, an unrelated new session, or temporary inactivity never proves a goal has ended. Never infer permission to delete historical evidence. Preserve recoverable history, source pointers, existing user files and links; avoid restructuring when savings are smaller than risk. Seek approval before irreversible deletion or broad refactors.
+
+**Propagate changes without cross-task contamination.** When a verified shared fact is corrected, update its canonical record with provenance, then find dependent workstreams where practical and flag affected drafts for review. Do not silently edit or finalize unrelated deliverables, override local preferences, or change an independent workstream's decision. Local changes to a CV draft, for example, should not rewrite a PS draft. Preserve prior values where their history explains a decision.
+
+**Check and evolve, not reorganize constantly.** At actual milestones, scope changes, or demonstrated context pressure, ask internally: can the current structure recover the relevant state quickly; is anything duplicated or stale; would a safe change clearly help? If not, keep it. When reorganizing, inspect and snapshot originals, migrate in small steps, repair references and host entrypoints, verify read-back and next-session recoverability, then retire old pointers only when safe. If multiple agents may write, check versions and reconcile rather than using blind last-writer-wins.
+
+**Scope-aware resume.** Read the project-wide instructions and compact shared index, then only the active workstream's checkpoint and relevant shared evidence. Do not load every draft or history merely because they live in one project. If the user's new task concerns several scopes, load their necessary records explicitly.
+
 ### 4. Generate the project entrypoint with an always-loaded persistence contract
 
 **On initialization, author the project's own root-level agent instructions**. Determine which file or files the actual host loads automatically, such as `AGENTS.md`, `CLAUDE.md`, or an existing supported equivalent. Inspect the host's behavior and existing files before deciding. If a host does not auto-load project instruction files, explain the setup requirement and provide a concise reusable startup instruction. An ordinary README may explain navigation but does not automatically become an agent instruction.
@@ -84,7 +107,7 @@ The generated entrypoint must be **project-specific**, short enough to load ever
 1. At session start, locate and read the small current-state index and only relevant evidence. Check actual project artifacts before trusting stale progress.
 2. During conversation and work, **capture meaningful new information promptly**, including goals, constraints, choices, user corrections, why options were rejected, discoveries, test results, learning evidence and misunderstandings, blockers, and concrete next steps. Save during work and after significant changes; never depend on a voluntary goodbye or end-of-session event.
 3. Distinguish tentative discussion from confirmed decisions, and reported claims from verified facts. Preserve provenance and meaningful history. Do not replace prior records with speculative summaries.
-4. Update the concise current checkpoint after meaningful milestones, preserving detail in retrievable records. Load only what the present task needs.
+4. Update the concise current checkpoint after meaningful milestones, preserving detail in retrievable records. Identify shared facts and the current task scope, load only what the present task needs, and adapt structure only when justified.
 5. After each persistence step, check that writes succeeded and links remain usable. If writing failed, disclose the gap and surface a recoverable, unsaved checkpoint; do not claim autosave.
 6. Before dangerous or broad file changes, inspect, back up, and get approval where needed. Never capture credentials or unnecessary personal/sensitive details.
 7. Explain how subsequent agents and other platforms can find and continue this system, including the required instructions loading behavior.
@@ -100,7 +123,7 @@ When capture is enabled and a writable location is authorized, review each **mea
 
 For exploratory dialogue, save a lightweight dated journal and provisional checkpoint in an authorized path. Do not label options as decisions. At formal startup, incorporate these records without dropping discarded ideas that explain current choices. For initialized work, append detail to the appropriate durable record and update the compact checkpoint. Use concise summaries for routine exchanges; keep necessary exact parameters and evidence pointers. Avoid needless repeats and overly aggressive compression. Never equate verbosity with accuracy.
 
-**Safe update sequence:** inspect existing content → compose smallest factual change → write without clobbering concurrent edits → read back or validate saved bytes → update index/checkpoint. If tools cannot write durably, say so immediately and provide a clearly marked **UNSAVED HANDOFF** containing important context. An inability to read prior conversations means only already-persisted content and user-supplied context are recoverable.
+**Safe update sequence:** inspect existing content → compose smallest factual change → write without clobbering concurrent edits → read back or validate saved bytes → update index/checkpoint. Route each durable update to shared knowledge, a genuine workstream's independent state, or provisional evidence as appropriate; do not create a new workstream for every chat. If tools cannot write durably, say so immediately and provide a clearly marked **UNSAVED HANDOFF** containing important context. An inability to read prior conversations means only already-persisted content and user-supplied context are recoverable.
 
 ### 6. Resume with selective retrieval
 
@@ -110,7 +133,7 @@ For education: distinguish introduced / practiced with help / independently demo
 
 ### 7. Audit, evolve, and protect history
 
-When retrieval becomes costly, sources conflict, files grow unwieldy, or the user's workflow changes, reason about a better structure. Propose or apply scoped, reversible restructuring. Before migration, inspect originals, create a recoverable backup or versioned revision, and preserve stable pointers, timestamps, decisions, and citations. Re-check links and checkpoints afterward. Do not silently discard evidence, user corrections, or history merely because an older model designed the structure differently.
+When retrieval becomes costly, sources conflict, files grow unwieldy, the user's workflow changes, or previously separate goals finish or merge, assess whether to expand, consolidate or archive the active structure. Propose or apply scoped, reversible restructuring. Before migration, inspect originals, create a recoverable backup or versioned revision, and preserve stable pointers, timestamps, decisions, and citations. Re-check links and checkpoints afterward. Do not silently discard evidence, user corrections, or history merely because an older model designed the structure differently.
 
 If there are contradictory records, label the conflict and inspect primary evidence; ask the user only if the disagreement is material and cannot be resolved. Concurrency matters: do not let two agents blindly overwrite the same state; serialize writes or reconcile conflicts using versions/Git when available.
 
