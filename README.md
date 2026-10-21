@@ -51,6 +51,16 @@ For example, after several weeks of studying, the project might have a short ent
 
 > I've already worked on this project across several chats. Use aios-in-project-memory to recover my current progress from the history and files you can access, build local project memory, and help me continue from here.
 
+## Grows and shrinks with your project
+
+**One goal? Keep it simple.** AIOS starts with the smallest useful memory structure. Opening another chat does not create another workstream.
+
+**Several related goals? Share facts, separate progress.** An application project might later have a CV, personal statement, and activities. They share one authoritative record of facts while each retains its own draft decisions and next step. The AI chooses when separate records are actually useful; you don't need to plan folders in advance.
+
+**Goals finished or removed? Simplify again.** The AI can archive or consolidate active records once there is a clear reason. Old evidence remains recoverable. Silence alone does not mean a task is finished, and unrelated drafts are not automatically rewritten when a shared fact changes.
+
+The goal is **the least complicated structure that still lets the next AI resume correctly**.
+
 ## What gets remembered?
 
 Whatever is useful for the **next conversation to continue accurately**: goals, current progress, verified results, decisions and their reasons, mistakes, corrections, unresolved questions, and the next step.
