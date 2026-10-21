@@ -21,7 +21,7 @@ class SkillContractTests(unittest.TestCase):
         self.assertGreater(len(metadata["description"]), 10)
         self.assertLessEqual(len(metadata["description"]), 1024)
         self.assertLessEqual(len(metadata["compatibility"]), 500)
-        self.assertIn('version: "0.4.2"', self.front)
+        self.assertIn('version: "0.5.0"', self.front)
         self.assertLessEqual(len(self.body.splitlines()), 500)
 
     def test_required_runtime_contract(self):
@@ -69,6 +69,66 @@ class SkillContractTests(unittest.TestCase):
         for phrase in required:
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, self.content.lower())
+
+    def test_adaptive_scale_single_goal_guardrail(self):
+        required = [
+            "complexity on demand",
+            "a single goal",
+            "never create a workstream",
+            "just because a new chat starts",
+            "do not plan hypothetical future tasks",
+            "when uncertain, save valuable information without adding structure",
+        ]
+        for phrase in required:
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, self.content.lower())
+
+    def test_scoped_shared_memory_and_contamination_rules(self):
+        required = [
+            "shared project knowledge",
+            "workstream-specific state",
+            "provisional or disputed material",
+            "one session may affect several workstreams",
+            "store once",
+            "fact, interpretation, and drafted wording distinct",
+            "propagate changes without cross-task contamination",
+            "do not silently edit or finalize unrelated deliverables",
+            "scope-aware resume",
+        ]
+        for phrase in required:
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, self.content.lower())
+
+    def test_contraction_and_non_destructive_migration(self):
+        required = [
+            "contract safely as needs decrease",
+            "explicitly removed",
+            "mere silence",
+            "never infer permission to delete historical evidence",
+            "reorganize constantly",
+            "snapshot originals",
+            "verify read-back",
+            "blind last-writer-wins",
+        ]
+        for phrase in required:
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, self.content.lower())
+
+    def test_adaptive_scale_evaluation_exists(self):
+        scenarios = (ROOT / "evals" / "adaptive-scale.md").read_text(encoding="utf-8").lower()
+        for phrase in [
+            "minimal single-goal project",
+            "independent deliverables",
+            "cross-scope correction",
+            "shrink after a goal is finished",
+            "noisy scope changes",
+            "concurrency and read-only failure",
+            "cross-ai checkpoint recovery",
+            "partial old history",
+        ]:
+            with self.subTest(scenario=phrase):
+                self.assertIn(phrase, scenarios)
+        self.assertIn("disk", scenarios)
 
     def test_lean_distribution(self):
         for folder in ("references", "assets", "templates"):
