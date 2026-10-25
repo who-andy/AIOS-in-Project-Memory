@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.6.0 (2026-10-25)
+
+- Fixed a real-world multi-target failure mode: distinct recipients or independently constrained goals can no longer remain as ambiguous records mixed at the project root.
+- Added explicit **target directories** with a discoverable shared knowledge area when multiple persistent targets have conflicting requirements, drafts or checkpoints. A single-target project still remains minimal.
+- Added **target-before-retrieval routing** and scope/provenance verification for limits, requirements, instructions, and decisions; unrelated targets must not silently inherit one another's rules.
+- Added safer migration for already cluttered project roots: inspect and snapshot, classify, separate, repair references, verify saved results and flag drafts already contaminated by another target's constraints.
+- Extended README documentation and regression scenarios for similar targets with deliberately conflicting requirements, ambiguous fresh sessions and unrelated industries.
+- No mandatory runtime tools or fixed school-specific folder templates. Existing local projects require an explicit agent migration run after updating the Skill.
+
 ## 0.5.0 (2026-10-21)
 
 - Added **Complexity on Demand**: minimal memory for a single goal, selective expansion only when real independent deliverables emerge.
