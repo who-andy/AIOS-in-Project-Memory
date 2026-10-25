@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.7.0 (2026-10-25)
+
+- Introduced **recursive, model-designed project scopes**: independently evolving workstreams can nest under targets and subtargets without a hard-coded depth or directory order, while one-target projects remain minimal.
+- Made sharing **relative to scope**, so evidence can be reusable within a parent target (e.g., its statement and interview) without becoming a global requirement for all targets.
+- Added **on-demand evidence discovery**: when relevant information is missing from loaded shared records, agents inspect authorized related scope indexes and source notes, verify provenance, and link or promote genuinely reusable evidence to a suitable canonical shared scope.
+- Explicitly protected scope-specific requirements, draft claims, and private material from unintended global promotion or cross-target reuse.
+- Required navigation and source links to remain recoverable after progressive nesting, promotion, and safe reorganization.
+- Added manual behavior tests for deep nesting, nonshared-source discovery, sharing boundaries, privacy, cross-cutting workstreams, and incremental migrations; expanded deterministic contract checks.
+- No required runtime dependencies, background services, fixed folder templates, or mandatory Hooks. The installed Skill and existing project folders must be updated separately.
+
 ## 0.6.0 (2026-10-25)
 
 - Fixed a real-world multi-target failure mode: distinct recipients or independently constrained goals can no longer remain as ambiguous records mixed at the project root.
