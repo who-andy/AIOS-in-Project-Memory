@@ -21,7 +21,7 @@ class SkillContractTests(unittest.TestCase):
         self.assertGreater(len(metadata["description"]), 10)
         self.assertLessEqual(len(metadata["description"]), 1024)
         self.assertLessEqual(len(metadata["compatibility"]), 500)
-        self.assertIn('version: "0.6.0"', self.front)
+        self.assertIn('version: "0.7.0"', self.front)
         self.assertLessEqual(len(self.body.splitlines()), 500)
 
     def test_required_runtime_contract(self):
@@ -184,6 +184,56 @@ class SkillContractTests(unittest.TestCase):
         ]:
             with self.subTest(evaluation=phrase):
                 self.assertIn(phrase, manual)
+
+    def test_recursive_scope_tree_with_adaptive_depth(self):
+        required = [
+            "recursive, meaningful nesting",
+            "nesting may continue",
+            "no fixed two-level limit",
+            "no mandatory school-first or deliverable-first",
+            "a single-goal project",
+            "explicit cross-links",
+            "scope path",
+        ]
+        for phrase in required:
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, self.content.lower())
+
+    def test_relative_shared_memory_and_on_demand_discovery(self):
+        required = [
+            "shared is relative to scope",
+            "least common appropriate ancestor",
+            "discover missing information before declaring it unavailable",
+            "parent, sibling and related scope",
+            "candidate source",
+            "promote or link reusable discoveries incrementally",
+            "canonical record",
+            "original scope",
+            "read-only",
+            "user's authorized sharing boundary",
+            "never silently convert a school-specific word limit",
+        ]
+        for phrase in required:
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, self.content.lower())
+
+    def test_hierarchical_scope_behavior_protocol_exists(self):
+        doc = (ROOT / "evals" / "hierarchical-scopes.md").read_text(encoding="utf-8").lower()
+        for phrase in [
+            "start small, then nest progressively",
+            "statement and interview under one institution",
+            "on-demand promotion from a nonshared note",
+            "shared is relative to the consumer group",
+            "candidate is not automatically a fact",
+            "authorization and sensitive boundaries",
+            "growing and refactoring an existing tree",
+            "cross-cutting workstream",
+        ]:
+            with self.subTest(scenario=phrase):
+                self.assertIn(phrase, doc)
+        self.assertIn("65", doc)
+        self.assertIn("500 words", doc)
+        self.assertIn("700", doc)
 
     def test_lean_distribution(self):
         for folder in ("references", "assets", "templates"):
