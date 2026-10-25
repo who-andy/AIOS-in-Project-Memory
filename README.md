@@ -61,23 +61,34 @@ For example, after several weeks of studying, the project might have a short ent
 
 The goal is **the least complicated structure that still lets the next AI resume correctly**.
 
-## Multiple targets stay separate
+## Nested projects and intelligent sharing
 
-When a project grows into several **independently constrained targets**, AIOS now creates separate target directories instead of piling their records into the project root. Each target keeps its own rules, drafts and current progress; verified facts useful to several targets stay in a shared area.
+One project can have **nested targets at as many meaningful levels as the work requires**. AIOS keeps a single-goal project small, then builds deeper folders only when independent tasks need their own drafts, constraints or checkpoints.
 
-For example, if you are preparing statements for multiple universities, the AI must not apply one university's requirements to another. It identifies the target before reading target-specific notes. If the target is unclear, it asks rather than guessing.
+For example, an application project might evolve into:
 
 ```text
-project/
-├── AGENTS.md              # Host-specific entrypoint, if needed
-├── shared/                # Facts and reusable evidence
-├── hku/                   # HKU-only requirements, drafts, progress
-└── hkust/                 # HKUST-only requirements, drafts, progress
+applications/
+├── AGENTS.md                 # Project entrypoint, where supported
+├── shared/                   # Reusable facts across schools
+│   └── activities.md
+└── universities/
+    ├── HKU/
+    │   ├── shared/            # Verified HKU context useful to both tasks
+    │   ├── personal-statement/
+    │   └── interview/
+    └── HKUST/
+        ├── personal-statement/
+        └── interview/
 ```
 
-**This is an illustrative outcome, not a hard-coded template.** With only one goal, the AI keeps the structure minimal. Other industries may have separate customers, products or environments instead of schools.
+This is **only an example**, not a mandatory depth, tree shape or fixed naming convention. The model can nest further, choose a different grouping, or use lightweight references when that better fits the project. Multiple distinct targets must not leave their conflicting requirements mixed in the project root.
 
-**Already have mixed files in the root?** In the existing project directory, ask your AI: "Use aios-in-project-memory to audit the current project root. Separate independently constrained targets into directories, put genuinely reusable evidence in shared memory, and check every draft for cross-target requirement leakage. Back up before moving files, preserve history and references, and verify the result." Updating the installed Skill alone will not automatically reorganize existing project files.
+**Shared memory is dynamic and scoped.** If an interview task needs a factual achievement that currently appears only in a PS research note, AIOS should discover that source within the authorized project, verify its provenance and applicability, and link or promote the reusable evidence to an appropriate shared scope. School-specific word limits and draft decisions must not be promoted as universally applicable. A shared fact remains authoritative in one place, with relevant tasks linking to it.
+
+**Each new session identifies its actual target and subtask before applying requirements.** It reads the relevant branch and only necessary shared evidence; it doesn't automatically import sibling rules or every project file.
+
+**Already have mixed files at the root?** Updating the Skill does not rearrange them automatically. In that local project ask AIOS to inventory, back up, inspect and safely reorganize the existing files, check previous drafts for cross-target requirement leakage, verify references, and retain uncertain material for review.
 
 ## What gets remembered?
 
