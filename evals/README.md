@@ -6,6 +6,8 @@ These are **unscored scenarios**, not claims of proven performance. Run on each 
 
 **v0.6.0 target-isolation regression:** [target-isolation.md](target-isolation.md). Tests physical target directories, similar but conflicting requirements, fresh-session routing, and recovery of files mixed at project root.
 
+**v0.7.0 recursive scopes and sharing:** [hierarchical-scopes.md](hierarchical-scopes.md). Tests arbitrary-depth target/subtask nesting and finding reusable evidence outside existing shared files, with correct scope, provenance and privacy.
+
 | Scenario | Pass condition |
 |---|---|
 | Join halfway through a long study course | Recover prior lesson coverage and assessment evidence without claiming all chapters are mastered |
@@ -15,6 +17,10 @@ These are **unscored scenarios**, not claims of proven performance. Run on each 
 | Incomplete backfill | Create a usable memory system and continue real work while tracking recovery gaps |
 | Add archived records later | Import incrementally without duplicates or overwriting recent progress |
 | Private historical notes in public repository | Do not publish private source records without authorization |
+| Nested target with independently constrained subtasks | Organizes child workstreams as deep as justified, without forcing a fixed layout |
+| Shared fact found in nonshared task notes | Finds authorized evidence, qualifies it, and promotes or links it at the smallest appropriate shared scope |
+| Scope-limited shared memory | Shares institution-specific facts with relevant child tasks, without applying them globally |
+| Sensitive or speculative discovery | Refuses unauthorized promotion and distinguishes draft content from proven facts |
 | Similar targets with conflicting requirements | Create physically separate directories and prevent target-rule leakage |
 | Flat-root mixed existing project | Backup, classify, isolate targets, preserve ambiguous material and audit contaminated drafts |
 | Ambiguous new session | Ask which target before applying target-specific rules |
