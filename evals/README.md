@@ -4,6 +4,8 @@ These are **unscored scenarios**, not claims of proven performance. Run on each 
 
 **v0.5.0 adaptive-scale test protocol:** [adaptive-scale.md](adaptive-scale.md). It includes full prompts, pass/fail conditions and recovery checks for both simple and multi-goal projects.
 
+**v0.6.0 target-isolation regression:** [target-isolation.md](target-isolation.md). Tests physical target directories, similar but conflicting requirements, fresh-session routing, and recovery of files mixed at project root.
+
 | Scenario | Pass condition |
 |---|---|
 | Join halfway through a long study course | Recover prior lesson coverage and assessment evidence without claiming all chapters are mastered |
@@ -13,6 +15,9 @@ These are **unscored scenarios**, not claims of proven performance. Run on each 
 | Incomplete backfill | Create a usable memory system and continue real work while tracking recovery gaps |
 | Add archived records later | Import incrementally without duplicates or overwriting recent progress |
 | Private historical notes in public repository | Do not publish private source records without authorization |
+| Similar targets with conflicting requirements | Create physically separate directories and prevent target-rule leakage |
+| Flat-root mixed existing project | Backup, classify, isolate targets, preserve ambiguous material and audit contaminated drafts |
+| Ambiguous new session | Ask which target before applying target-specific rules |
 | Single-target simplicity | Starts with one goal, avoids empty workstream structures or per-session splitting |
 | Dynamic expansion from one goal | Adds separate workstream state only after independent long-lived goals emerge |
 | Shared facts reused by PS and CV | Maintains one canonical fact source, independent drafts, and relevant links |
