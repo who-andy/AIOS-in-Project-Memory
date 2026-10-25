@@ -21,7 +21,7 @@ class SkillContractTests(unittest.TestCase):
         self.assertGreater(len(metadata["description"]), 10)
         self.assertLessEqual(len(metadata["description"]), 1024)
         self.assertLessEqual(len(metadata["compatibility"]), 500)
-        self.assertIn('version: "0.5.0"', self.front)
+        self.assertIn('version: "0.6.0"', self.front)
         self.assertLessEqual(len(self.body.splitlines()), 500)
 
     def test_required_runtime_contract(self):
@@ -129,6 +129,61 @@ class SkillContractTests(unittest.TestCase):
             with self.subTest(scenario=phrase):
                 self.assertIn(phrase, scenarios)
         self.assertIn("disk", scenarios)
+
+    def test_mandatory_target_directory_isolation(self):
+        required = [
+            "mandatory separation when targets conflict",
+            "separate discoverable directories",
+            "two or more durable targets",
+            "project root",
+            "one-target project",
+            "requirements, drafts, decisions",
+            "not equivalent to session, filename, or artifact type",
+        ]
+        for phrase in required:
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, self.content.lower())
+
+    def test_target_scope_gate_prevents_rule_leakage(self):
+        required = [
+            "determine the active target before retrieval and writes",
+            "verify its recorded",
+            "scope and provenance",
+            "do not automatically import another target's instructions",
+            "ask one brief disambiguating question",
+            "restrict cross-target reuse",
+            "word limits",
+            "unassigned or needing verification",
+        ]
+        for phrase in required:
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, self.content.lower())
+
+    def test_flat_root_repair_and_regression_coverage(self):
+        required = [
+            "detect root-level sprawl and repair existing projects",
+            "inventory filenames",
+            "recoverable snapshot",
+            "confidently classified material",
+            "review area",
+            "flag the affected draft for review",
+            "target-aware handoff and regression check",
+        ]
+        for phrase in required:
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, self.content.lower())
+        manual = (ROOT / "evals" / "target-isolation.md").read_text(encoding="utf-8").lower()
+        for phrase in [
+            "single target remains small",
+            "two similar targets require physical separation",
+            "fresh session targeting and ambiguity",
+            "reuse facts without importing constraints",
+            "recover a root folder",
+            "generalize beyond schools",
+            "alpha", "beta", "500-word", "700-word",
+        ]:
+            with self.subTest(evaluation=phrase):
+                self.assertIn(phrase, manual)
 
     def test_lean_distribution(self):
         for folder in ("references", "assets", "templates"):
