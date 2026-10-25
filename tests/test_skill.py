@@ -149,7 +149,7 @@ class SkillContractTests(unittest.TestCase):
             "determine the active target before retrieval and writes",
             "verify its recorded",
             "scope and provenance",
-            "do not automatically import another target's instructions",
+            "do not automatically import sibling or other target instructions",
             "ask one brief disambiguating question",
             "restrict cross-target reuse",
             "word limits",
@@ -191,7 +191,7 @@ class SkillContractTests(unittest.TestCase):
             "nesting may continue",
             "no fixed two-level limit",
             "no mandatory school-first or deliverable-first",
-            "a single-goal project",
+            "a one-target project",
             "explicit cross-links",
             "scope path",
         ]
