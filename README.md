@@ -61,6 +61,24 @@ For example, after several weeks of studying, the project might have a short ent
 
 The goal is **the least complicated structure that still lets the next AI resume correctly**.
 
+## Multiple targets stay separate
+
+When a project grows into several **independently constrained targets**, AIOS now creates separate target directories instead of piling their records into the project root. Each target keeps its own rules, drafts and current progress; verified facts useful to several targets stay in a shared area.
+
+For example, if you are preparing statements for multiple universities, the AI must not apply one university's requirements to another. It identifies the target before reading target-specific notes. If the target is unclear, it asks rather than guessing.
+
+```text
+project/
+├── AGENTS.md              # Host-specific entrypoint, if needed
+├── shared/                # Facts and reusable evidence
+├── hku/                   # HKU-only requirements, drafts, progress
+└── hkust/                 # HKUST-only requirements, drafts, progress
+```
+
+**This is an illustrative outcome, not a hard-coded template.** With only one goal, the AI keeps the structure minimal. Other industries may have separate customers, products or environments instead of schools.
+
+**Already have mixed files in the root?** In the existing project directory, ask your AI: "Use aios-in-project-memory to audit the current project root. Separate independently constrained targets into directories, put genuinely reusable evidence in shared memory, and check every draft for cross-target requirement leakage. Back up before moving files, preserve history and references, and verify the result." Updating the installed Skill alone will not automatically reorganize existing project files.
+
 ## What gets remembered?
 
 Whatever is useful for the **next conversation to continue accurately**: goals, current progress, verified results, decisions and their reasons, mistakes, corrections, unresolved questions, and the next step.
