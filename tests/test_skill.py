@@ -21,7 +21,7 @@ class SkillContractTests(unittest.TestCase):
         self.assertGreater(len(metadata["description"]), 10)
         self.assertLessEqual(len(metadata["description"]), 1024)
         self.assertLessEqual(len(metadata["compatibility"]), 500)
-        self.assertIn('version: "0.8.0"', self.front)
+        self.assertIn('version: "0.9.0"', self.front)
         self.assertLessEqual(len(self.body.splitlines()), 500)
 
     def test_required_runtime_contract(self):
@@ -284,8 +284,64 @@ class SkillContractTests(unittest.TestCase):
                 self.assertIn(phrase, doc)
         self.assertIn("without invoking the new skill", doc)
 
+    def test_project_coordination_default_is_lightweight(self):
+        expected = [
+            "lightweight project coordination and optional host capabilities",
+            "keep normal chatting as the sole required user interface",
+            "project-state pulse for real multi-task work",
+            "derived, source-linked view",
+            "without a dedicated master session",
+            "progressive disclosure",
+            "only when",
+        ]
+        for phrase in expected:
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, self.content.lower())
+        self.assertIn("references/project-coordination.md", self.content)
+        doc = (ROOT / "references" / "project-coordination.md").read_text(encoding="utf-8").lower()
+        for phrase in [
+            "project pulse", "cross-session change notices",
+            "one writer", "worktrees", "source evidence",
+            "verified", "stale", "tiny projects",
+        ]:
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, doc)
+
+    def test_host_adapters_are_optional_and_host_checked(self):
+        self.assertIn("references/host-adapters.md", self.content)
+        required = [
+            "optional host-aware enhancements; default off",
+            "do not install hooks",
+            "actual",
+            "permissions",
+            "not assumed to share the same local memory files",
+            "skill description alone does not create a runnable scheduler",
+        ]
+        for phrase in required:
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, self.content.lower())
+        doc = (ROOT / "references" / "host-adapters.md").read_text(encoding="utf-8").lower()
+        for phrase in [
+            "claude code", "codex", "claude.md", "agents.md",
+            "sessionstart", "precompact", "/loop",
+            "cloud", "desktop", "worktree", "user-language automation pathway",
+            "no default hooks", "no phantom automation",
+        ]:
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, doc)
+
+    def test_coordinator_eval_exists(self):
+        doc = (ROOT / "evals" / "coordination-hosts.md").read_text(encoding="utf-8").lower()
+        for phrase in [
+            "single-goal", "two independent", "shared change",
+            "stale", "concurrent", "claude", "codex", "scheduled",
+            "remote", "legacy", "zero",
+        ]:
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, doc)
+
     def test_lean_distribution(self):
-        for folder in ("references", "assets", "templates"):
+        for folder in ("assets", "templates"):
             self.assertFalse((ROOT / folder).exists())
         for file in ("README.md", "README.zh-CN.md", "LICENSE", "evals/README.md"):
             self.assertTrue((ROOT / file).exists())
