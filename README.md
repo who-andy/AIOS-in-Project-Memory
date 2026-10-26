@@ -48,6 +48,18 @@ If you originally installed it globally (`-g`):
 npx skills update aios-in-project-memory -g
 ```
 
+**If `skills update` prints `Failed to update`:** the Skills CLI sometimes fails during its internal reinstall step without showing the underlying error. Reinstall the Skill directly from its GitHub source instead:
+
+```bash
+# Global installation
+npx skills@latest add who-andy/AIOS-in-Project-Memory --skill aios-in-project-memory -g -y
+
+# Project installation (run in the project directory)
+npx skills@latest add who-andy/AIOS-in-Project-Memory --skill aios-in-project-memory -y
+```
+
+This replaces/refreshes the installed Skill; **do not delete your project's memory records, drafts, or AGENTS.md/CLAUDE.md**. If direct install also fails, inspect that command's error output and confirm your Node.js version, internet/GitHub access, and install scope before troubleshooting further.
+
 Restart your Claude Code or Codex session so it can load the updated Skill. Updating the **installed Skill** does not by itself reorganize existing project memory files; in older projects, invoke the updated Skill once to audit and safely migrate them if needed. See [automatic project-memory migration](#automatic-migration-of-existing-project-memory).
 
 ## How it works
