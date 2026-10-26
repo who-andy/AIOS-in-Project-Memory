@@ -90,6 +90,18 @@ This is **only an example**, not a mandatory depth, tree shape or fixed naming c
 
 **Already have mixed files at the root?** Updating the Skill does not rearrange them automatically. In that local project ask AIOS to inventory, back up, inspect and safely reorganize the existing files, check previous drafts for cross-target requirement leakage, verify references, and retain uncertain material for review.
 
+## Automatic migration of existing project memory (v0.8)
+
+When an updated, trusted AIOS Skill is **actually loaded** in a writable project, it can inspect the project's existing instructions and memory, detect obsolete structures, and **automatically apply safe, reversible adjustments**. It preserves the original data, repairs navigation and checks that new sessions can find the correct scope. A small marker in the project entrypoint (e.g. `AIOS memory policy: 0.8.0`) identifies the latest successfully applied policy; merely installing a new Skill version does **not** advance it.
+
+**Not a background updater:** Updating the CLI-installed Skill does not automatically change old `AGENTS.md`/`CLAUDE.md` files. A legacy project must load/invoke the updated Skill at least once to bootstrap this behavior; afterward a generated entrypoint can check locally available Skill instructions on later sessions. If the installed Skill is unavailable, the project continues to work using existing instructions rather than claiming a version check.
+
+**No destructive autopilot:** It can create missing indexes, directories and validated references, but must preserve snapshots/history and ask before irreversible deletion, risky overwrites, permission changes or sharing sensitive data outside its original boundary. A repeat launch should not endlessly rearrange a healthy project.
+
+To upgrade an old project, update your local Skill using your installer, open the **existing** project folder in your file-capable agent, and request:
+
+> Use the latest aios-in-project-memory in this project. Audit my existing project memory, safely migrate only what is actually needed, preserve and verify all files, and write the applied memory policy version only after successful checks.
+
 ## What gets remembered?
 
 Whatever is useful for the **next conversation to continue accurately**: goals, current progress, verified results, decisions and their reasons, mistakes, corrections, unresolved questions, and the next step.
