@@ -240,7 +240,7 @@ class SkillContractTests(unittest.TestCase):
             "version-aware self-migration",
             "trigger, not a background daemon",
             "minimal version handshake",
-            "aios memory policy: 0.8.0",
+            "aios memory policy: 0.9.0",
             "bootstrap realities",
             "inspect, classify and plan before writes",
             "auto-apply reversible changes only",
