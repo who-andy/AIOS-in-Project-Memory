@@ -90,9 +90,17 @@ This is **only an example**, not a mandatory depth, tree shape or fixed naming c
 
 **Already have mixed files at the root?** Updating the Skill does not rearrange them automatically. In that local project ask AIOS to inventory, back up, inspect and safely reorganize the existing files, check previous drafts for cross-target requirement leakage, verify references, and retain uncertain material for review.
 
-## Automatic migration of existing project memory (v0.8)
+## Works with Claude Code and Codex, without a controller chat
 
-When an updated, trusted AIOS Skill is **actually loaded** in a writable project, it can inspect the project's existing instructions and memory, detect obsolete structures, and **automatically apply safe, reversible adjustments**. It preserves the original data, repairs navigation and checks that new sessions can find the correct scope. A small marker in the project entrypoint (e.g. `AIOS memory policy: 0.8.0`) identifies the latest successfully applied policy; merely installing a new Skill version does **not** advance it.
+AIOS now maintains a **small, evidence-linked project-state view only when multiple independent workstreams or dependencies justify it**. A new session can discover the correct task, verified progress, blockers and affected shared facts. It does not make all drafts or requirements globally applicable. No dashboard, central manager session or new setup is required for ordinary use.
+
+Optional, host-aware integrations can help with advanced projects: Claude Code Skills/Hooks/subagents or supported scheduling choices, and Codex project instructions/multi-agent/Automations when the actual host exposes them. These are **not enabled by default**. If you ask for a recurring project check, AIOS should verify scheduling support, permissions and the scheduler's access to your real project files before claiming a task was configured. A cloud job may not see a laptop folder.
+
+The Skill remains portable and file-first. The extra guidance lives in [project coordination](references/project-coordination.md) and [optional host adapters](references/host-adapters.md), loaded only when needed.
+
+## Automatic migration of existing project memory
+
+When an updated, trusted AIOS Skill is **actually loaded** in a writable project, it can inspect the project's existing instructions and memory, detect obsolete structures, and **automatically apply safe, reversible adjustments**. It preserves the original data, repairs navigation and checks that new sessions can find the correct scope. A small marker in the project entrypoint (e.g. `AIOS memory policy: 0.9.0`) identifies the latest successfully applied policy; merely installing a new Skill version does **not** advance it.
 
 **Not a background updater:** Updating the CLI-installed Skill does not automatically change old `AGENTS.md`/`CLAUDE.md` files. A legacy project must load/invoke the updated Skill at least once to bootstrap this behavior; afterward a generated entrypoint can check locally available Skill instructions on later sessions. If the installed Skill is unavailable, the project continues to work using existing instructions rather than claiming a version check.
 
