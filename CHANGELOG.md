@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.8.0 (2026-10-26)
+
+- Added **Version-Aware Self-Migration**: when a newer AIOS Skill is actually loaded into an authorized existing project, it audits the current memory layout and automatically applies necessary low-risk, reversible upgrades.
+- Added a lightweight applied-policy marker (`AIOS memory policy: 0.8.0`) in generated project entrypoints/checkpoints. Advance it only after verified successful application, never merely on installation or partial writes.
+- Added legacy bootstrap behavior: when old project instructions do not yet know how to check for updates, explicitly invoke the installed new Skill once in the project. Future entrypoints can check locally discoverable trusted Skill versions without mandatory internet access.
+- Defined snapshot, evidence classification, source/destination mapping, link repair, rollback, concurrency awareness, high-risk approval gates and idempotent reruns.
+- Emphasized that no automatic background service or GitHub release event can directly migrate local project files.
+- Added eight manual migration evaluation cases and deterministic contract tests, updated English and Chinese usage instructions.
+- No mandatory hooks, install-time scripts, dedicated version-manifest file or fixed project directory template.
+
 ## 0.7.0 (2026-10-25)
 
 - Introduced **recursive, model-designed project scopes**: independently evolving workstreams can nest under targets and subtargets without a hard-coded depth or directory order, while one-target projects remain minimal.
