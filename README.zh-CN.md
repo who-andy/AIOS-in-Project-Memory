@@ -46,6 +46,18 @@ npx skills update aios-in-project-memory -p
 npx skills update aios-in-project-memory -g
 ```
 
+**如果更新时报 `Failed to update`：** Skills CLI 的更新流程可能在内部重新安装时失败，却没有显示具体错误。可直接从 GitHub 重新安装最新版，绕过 `update` 流程：
+
+```bash
+# 全局安装的用户
+npx skills@latest add who-andy/AIOS-in-Project-Memory --skill aios-in-project-memory -g -y
+
+# 项目内安装的用户（先进入该项目目录）
+npx skills@latest add who-andy/AIOS-in-Project-Memory --skill aios-in-project-memory -y
+```
+
+这只是重新安装 Skill，**不要删除原有项目记忆、PS 草稿或 AGENTS.md/CLAUDE.md**。如果直接安装也失败，请查看命令打印的实际报错，检查 Node.js 版本、GitHub 连接和安装范围。
+
 更新后重新开启 Claude Code 或 Codex 会话，让 Agent 加载新版 Skill。**更新安装包不会直接改动已有项目记忆文件**；对于旧项目，首次需要在原项目中调用新版 AIOS，按需完成安全迁移，详见下文的[旧项目记忆自动迁移](#旧项目记忆自动迁移)。
 
 ## 它是怎么工作的？
