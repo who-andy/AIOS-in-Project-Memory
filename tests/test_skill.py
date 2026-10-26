@@ -21,7 +21,7 @@ class SkillContractTests(unittest.TestCase):
         self.assertGreater(len(metadata["description"]), 10)
         self.assertLessEqual(len(metadata["description"]), 1024)
         self.assertLessEqual(len(metadata["compatibility"]), 500)
-        self.assertIn('version: "0.7.0"', self.front)
+        self.assertIn('version: "0.8.0"', self.front)
         self.assertLessEqual(len(self.body.splitlines()), 500)
 
     def test_required_runtime_contract(self):
@@ -234,6 +234,55 @@ class SkillContractTests(unittest.TestCase):
         self.assertIn("65", doc)
         self.assertIn("500 words", doc)
         self.assertIn("700", doc)
+
+    def test_version_aware_self_migration_contract(self):
+        required = [
+            "version-aware self-migration",
+            "trigger, not a background daemon",
+            "minimal version handshake",
+            "aios memory policy: 0.8.0",
+            "bootstrap realities",
+            "inspect, classify and plan before writes",
+            "auto-apply reversible changes only",
+            "require user approval for risky operations",
+            "verify, commit and remain idempotent",
+            "do not advance the policy marker",
+            "make this capability survive future sessions",
+        ]
+        for phrase in required:
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, self.content.lower())
+
+    def test_migration_version_claims_are_honest(self):
+        required = [
+            "newer actually loaded",
+            "not installation or remote updates",
+            "marker is absent",
+            "unknown",
+            "cannot force a legacy entrypoint",
+            "new skill at least once",
+            "without blocking work",
+            "continue with the existing self-contained project instructions",
+        ]
+        for phrase in required:
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, self.content.lower())
+
+    def test_migration_behavior_scenarios_are_documented(self):
+        doc = (ROOT / "evals" / "auto-migration.md").read_text(encoding="utf-8").lower()
+        for phrase in [
+            "upgrade old flat-root project",
+            "idempotent second run",
+            "safe incremental task growth without version change",
+            "first updated launch from a legacy entrypoint",
+            "no new skill installed or inaccessible package",
+            "risky deletion and permissions",
+            "failed write, broken link and rollback",
+            "healthy single-goal project, newer skill",
+        ]:
+            with self.subTest(scenario=phrase):
+                self.assertIn(phrase, doc)
+        self.assertIn("without invoking the new skill", doc)
 
     def test_lean_distribution(self):
         for folder in ("references", "assets", "templates"):
