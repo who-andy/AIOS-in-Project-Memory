@@ -28,7 +28,7 @@ class SkillContractTests(unittest.TestCase):
     def test_frontmatter_is_parseable_by_real_yaml_parser(self):
         # Regex-only metadata checks previously missed an unquoted colon in
         # description; the Skills CLI rejected the entire repository.
-        parsed = yaml.safe_load(self.front.removeprefix("---\\n"))
+        parsed = yaml.safe_load(self.front[4:])
         self.assertIsInstance(parsed, dict)
         self.assertEqual(parsed["name"], "aios-in-project-memory")
         self.assertIsInstance(parsed["description"], str)
@@ -37,7 +37,9 @@ class SkillContractTests(unittest.TestCase):
         self.assertIsInstance(parsed["compatibility"], str)
         self.assertEqual(parsed["metadata"]["version"], "0.9.0")
         with self.assertRaises(yaml.YAMLError):
-            yaml.safe_load("name: sample\\ndescription: something with needs: a fix\\n")
+            yaml.safe_load("""name: sample
+description: something with needs: a fix
+""")
 
     def test_required_runtime_contract(self):
         required = [
