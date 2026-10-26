@@ -28,6 +28,28 @@ npx skills add who-andy/AIOS-in-Project-Memory --list
 
 Requires Node.js/npm and a compatible AI agent. Installation uses the open-source [Skills CLI](https://github.com/vercel-labs/skills).
 
+### Update an existing installation
+
+Check whether updates are available:
+
+```bash
+npx skills check
+```
+
+Update **AIOS only** in the current project (run inside that project's folder):
+
+```bash
+npx skills update aios-in-project-memory -p
+```
+
+If you originally installed it globally (`-g`):
+
+```bash
+npx skills update aios-in-project-memory -g
+```
+
+Restart your Claude Code or Codex session so it can load the updated Skill. Updating the **installed Skill** does not by itself reorganize existing project memory files; in older projects, invoke the updated Skill once to audit and safely migrate them if needed. See [automatic project-memory migration](#automatic-migration-of-existing-project-memory-v08).
+
 ## How it works
 
 1. **Talk to your AI.** Discuss a project, study a subject, or work on software as usual. You can initialize memory immediately, or wait until you've worked out what you want.
