@@ -48,7 +48,7 @@ If you originally installed it globally (`-g`):
 npx skills update aios-in-project-memory -g
 ```
 
-Restart your Claude Code or Codex session so it can load the updated Skill. Updating the **installed Skill** does not by itself reorganize existing project memory files; in older projects, invoke the updated Skill once to audit and safely migrate them if needed. See [automatic project-memory migration](#automatic-migration-of-existing-project-memory-v08).
+Restart your Claude Code or Codex session so it can load the updated Skill. Updating the **installed Skill** does not by itself reorganize existing project memory files; in older projects, invoke the updated Skill once to audit and safely migrate them if needed. See [automatic project-memory migration](#automatic-migration-of-existing-project-memory).
 
 ## How it works
 
