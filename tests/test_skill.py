@@ -1,6 +1,7 @@
 """Deterministic package tests; not an evaluation of model behavior."""
 import re
 import unittest
+import yaml
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -23,6 +24,20 @@ class SkillContractTests(unittest.TestCase):
         self.assertLessEqual(len(metadata["compatibility"]), 500)
         self.assertIn('version: "0.9.0"', self.front)
         self.assertLessEqual(len(self.body.splitlines()), 500)
+
+    def test_frontmatter_is_parseable_by_real_yaml_parser(self):
+        # Regex-only metadata checks previously missed an unquoted colon in
+        # description; the Skills CLI rejected the entire repository.
+        parsed = yaml.safe_load(self.front.removeprefix("---\\n"))
+        self.assertIsInstance(parsed, dict)
+        self.assertEqual(parsed["name"], "aios-in-project-memory")
+        self.assertIsInstance(parsed["description"], str)
+        self.assertTrue(parsed["description"].strip())
+        self.assertLessEqual(len(parsed["description"]), 1024)
+        self.assertIsInstance(parsed["compatibility"], str)
+        self.assertEqual(parsed["metadata"]["version"], "0.9.0")
+        with self.assertRaises(yaml.YAMLError):
+            yaml.safe_load("name: sample\\ndescription: something with needs: a fix\\n")
 
     def test_required_runtime_contract(self):
         required = [
