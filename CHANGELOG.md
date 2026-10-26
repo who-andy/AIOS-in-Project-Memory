@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.9.0 (2026-10-26)
+
+- Added **low-friction project-state coordination**: a compact, evidence-linked pulse of active workstreams, blockers, dependencies and shared-source changes when actually useful, with no mandatory manager Session, task dashboard or status schema.
+- Introduced optional, progressively loaded [project coordination](references/project-coordination.md), including scoped change notices, downstream review flags, concurrency/ownership guidance and worktree isolation awareness.
+- Added [host-aware Claude Code and Codex guidance](references/host-adapters.md) for platform entrypoints, optional Hooks, subagents, supported scheduling and local-vs-remote file access, without requiring any host-specific setup for core AIOS.
+- Guarded optional automation: no schedules, Hooks, privileged scripts or extra agent usage by default; require actual capabilities, appropriate authorization and confirmed host/tool results.
+- Kept generated root instructions compact, with reference files loaded only for relevant complex tasks.
+- Updated bilingual README, migration policy marker and behavior evaluations; added 3 deterministic contract tests (27 total) and 10 additional manual evaluation cases.
+- This is a prompt-first and reference-based integration; no native scheduler, Hook, daemon or shared-state locking engine is installed.
+
 ## 0.8.0 (2026-10-26)
 
 - Added **Version-Aware Self-Migration**: when a newer AIOS Skill is actually loaded into an authorized existing project, it audits the current memory layout and automatically applies necessary low-risk, reversible upgrades.
