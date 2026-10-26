@@ -10,5 +10,18 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Run contract tests
+      - name: Install YAML validator
+        run: python3 -m pip install PyYAML==6.0.2
+      - name: Run contract and YAML parsing tests
         run: python3 -m unittest discover -s tests -v
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.20.0'
+      - name: Discover AIOS with the actual Skills CLI
+        shell: bash
+        run: |
+          set -o pipefail
+          npx --yes skills@1.7.4 add . --list | tee /tmp/aios-discovery.txt
+          grep -q 'aios-in-project-memory' /tmp/aios-discovery.txt
+      - name: Install AIOS with the actual Skills CLI
+        run: npx --yes skills@1.7.4 add . --skill aios-in-project-memory -a codex -g -y
