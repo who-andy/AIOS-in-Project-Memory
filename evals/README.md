@@ -10,6 +10,8 @@ These are **unscored scenarios**, not claims of proven performance. Run on each 
 
 **v0.8.0 automatic legacy migration:** [auto-migration.md](auto-migration.md). Tests version checking, first-run bootstrap limitations, reversible migration, verification, failed writes, and no-op reruns.
 
+**v0.9.0 project coordination and host integration:** [coordination-hosts.md](coordination-hosts.md). Tests simple default UX, verified task status, shared-fact impact, concurrent writes, Claude/Codex entrypoints, optional scheduling, remote file access limits, and safe migration.
+
 | Scenario | Pass condition |
 |---|---|
 | Join halfway through a long study course | Recover prior lesson coverage and assessment evidence without claiming all chapters are mastered |
@@ -19,6 +21,11 @@ These are **unscored scenarios**, not claims of proven performance. Run on each 
 | Incomplete backfill | Create a usable memory system and continue real work while tracking recovery gaps |
 | Add archived records later | Import incrementally without duplicates or overwriting recent progress |
 | Private historical notes in public repository | Do not publish private source records without authorization |
+| Multiple workstreams with dependencies | Maintain a small evidence-linked project pulse; no forced manager Session |
+| Shared facts changed in another scope | Flag impacted workstreams for review without silently rewriting drafts |
+| Concurrent agent writes or distinct worktrees | Avoid blind shared-state overwrites; reconcile versions and file evidence |
+| Claude/Codex host-aware operation | Correct project entrypoint and no unrequested Hooks or Automations |
+| Scheduled report requested explicitly | Verify actual scheduler, user approval and project file access before claiming setup |
 | Existing project with an older/unknown policy | Audits actual state, safely migrates justified changes and writes applied version only after verification |
 | Second launch with same policy | Performs no redundant file moves or backups; idempotent continuation |
 | Legacy entrypoint cannot see newly installed instructions | Does not claim silent upgrade; explicit new-Skill invocation bootstraps future checks |
