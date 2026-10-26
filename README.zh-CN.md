@@ -26,6 +26,28 @@ npx skills add who-andy/AIOS-in-Project-Memory --list
 
 安装使用开源 [Skills CLI](https://github.com/vercel-labs/skills)，需要 Node.js/npm 和兼容的 AI Agent。
 
+### 更新已安装的 AIOS
+
+先检查是否有更新：
+
+```bash
+npx skills check
+```
+
+如果之前**安装在项目内**，进入对应项目目录执行：
+
+```bash
+npx skills update aios-in-project-memory -p
+```
+
+如果之前是**全局安装**（使用了 `-g`），执行：
+
+```bash
+npx skills update aios-in-project-memory -g
+```
+
+更新后重新开启 Claude Code 或 Codex 会话，让 Agent 加载新版 Skill。**更新安装包不会直接改动已有项目记忆文件**；对于旧项目，首次需要在原项目中调用新版 AIOS，按需完成安全迁移，详见下文的[旧项目记忆自动迁移](#旧项目记忆自动迁移)。
+
 ## 它是怎么工作的？
 
 1. **正常和 AI 聊天。** 先讨论项目想做什么、如何学习、软件要实现哪些功能。可以聊清楚后再正式启动记忆系统。
