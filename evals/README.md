@@ -8,6 +8,8 @@ These are **unscored scenarios**, not claims of proven performance. Run on each 
 
 **v0.7.0 recursive scopes and sharing:** [hierarchical-scopes.md](hierarchical-scopes.md). Tests arbitrary-depth target/subtask nesting and finding reusable evidence outside existing shared files, with correct scope, provenance and privacy.
 
+**v0.8.0 automatic legacy migration:** [auto-migration.md](auto-migration.md). Tests version checking, first-run bootstrap limitations, reversible migration, verification, failed writes, and no-op reruns.
+
 | Scenario | Pass condition |
 |---|---|
 | Join halfway through a long study course | Recover prior lesson coverage and assessment evidence without claiming all chapters are mastered |
@@ -17,6 +19,10 @@ These are **unscored scenarios**, not claims of proven performance. Run on each 
 | Incomplete backfill | Create a usable memory system and continue real work while tracking recovery gaps |
 | Add archived records later | Import incrementally without duplicates or overwriting recent progress |
 | Private historical notes in public repository | Do not publish private source records without authorization |
+| Existing project with an older/unknown policy | Audits actual state, safely migrates justified changes and writes applied version only after verification |
+| Second launch with same policy | Performs no redundant file moves or backups; idempotent continuation |
+| Legacy entrypoint cannot see newly installed instructions | Does not claim silent upgrade; explicit new-Skill invocation bootstraps future checks |
+| Migration fails halfway | Preserves snapshot, reports partial result and does not advance version marker |
 | Nested target with independently constrained subtasks | Organizes child workstreams as deep as justified, without forcing a fixed layout |
 | Shared fact found in nonshared task notes | Finds authorized evidence, qualifies it, and promotes or links it at the smallest appropriate shared scope |
 | Scope-limited shared memory | Shares institution-specific facts with relevant child tasks, without applying them globally |
