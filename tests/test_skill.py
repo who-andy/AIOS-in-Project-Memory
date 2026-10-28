@@ -321,7 +321,7 @@ description: something with needs: a fix
             "candidate", "active", "superseded/retired",
             "one canonical current authority", "user-reported",
             "no mandatory status field", "one-time exception",
-            "one successful command", "cross-device",
+            "a successful command", "cross-device",
         ]:
             with self.subTest(term=term):
                 self.assertIn(term, doc)
@@ -332,7 +332,7 @@ description: something with needs: a fix
             "tier 1 — persistence",
             "tier 2 — retrieval",
             "tier 3 — application",
-            "file sync", "entrypoint presence",
+            "file sync", "entrypoint existence",
             "real output", "cost gating",
             "does not prove", "do not claim",
         ]:
