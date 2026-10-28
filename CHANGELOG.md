@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.10.0 (2026-10-28)
+
+- Added **Memory Governance** as optional, progressively loaded [guidance](references/memory-governance.md) to help AIOS convert useful feedback into scoped, reliable project instructions without a mandatory new registry, UI or setup steps.
+- Separated **rule lifecycle** (`candidate → active → superseded/retired`) from **claim confidence** (verified, user-reported, tentative, conflicted). Explicit user preferences can be applicable without asserting externally verified facts.
+- Strengthened **single canonical authority**, recoverable rule replacements and downstream review flags when shared facts change, avoiding silently propagated exceptions or outdated instructions.
+- Defined bounded **failure-to-knowledge** capture, with actual trigger, environment, verified remedy, evidence and limits.
+- Introduced **three-tier continuity verification**: persistence/readback, actual session retrieval and outcome/application checks. Treat cross-device file equality, host instruction discovery and real deliverable correctness as different claims.
+- Maintained **progressive disclosure and low learning cost**: simple projects do not need governance files, statuses, extra agents, periodic tasks or hooks.
+- Added [behavioral evaluation scenarios](evals/memory-governance.md), deterministic guardrail tests, bilingual README guidance and v0.10.0 applied-policy marker; legacy project upgrades remain non-destructive and require the updated Skill to be loaded in the authorized project.
+- This remains a prompt-first Skill; static and packaging checks do **not** prove real multi-session Agent compliance or cross-device synchronization.
+
 ## 0.9.0 (2026-10-26)
 
 - Added **low-friction project-state coordination**: a compact, evidence-linked pulse of active workstreams, blockers, dependencies and shared-source changes when actually useful, with no mandatory manager Session, task dashboard or status schema.
