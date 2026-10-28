@@ -12,8 +12,13 @@ These are **unscored scenarios**, not claims of proven performance. Run on each 
 
 **v0.9.0 project coordination and host integration:** [coordination-hosts.md](coordination-hosts.md). Tests simple default UX, verified task status, shared-fact impact, concurrent writes, Claude/Codex entrypoints, optional scheduling, remote file access limits, and safe migration.
 
+**v0.10.0 memory governance and usable continuity:** [memory-governance.md](memory-governance.md). Tests scoped feedback promotion, separate source trust and rule lifecycle, canonical replacements, failure reuse, three-tier verification, cross-device proof boundaries, and non-destructive migration.
+
 | Scenario | Pass condition |
 |---|---|
+| One-time approval versus reusable guidance | A draft acceptance remains local; a clear lasting preference applies only to its stated scope |
+| Corrected shared facts and retired guidance | One current authority with evidence and recoverable history; impacted work marked for review |
+| Agent reads rule but delivers noncompliant output | Persistence/retrieval may pass but application check fails honestly |
 | Join halfway through a long study course | Recover prior lesson coverage and assessment evidence without claiming all chapters are mastered |
 | Import overlapping summaries of past sessions | Deduplicate while keeping chronology, source pointers, and superseded decisions |
 | Previous conversations unavailable | Disclose which material was inaccessible; ask only for an essential excerpt if needed |
