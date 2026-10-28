@@ -132,9 +132,19 @@ Optional, host-aware integrations can help with advanced projects: Claude Code S
 
 The Skill remains portable and file-first. The extra guidance lives in [project coordination](references/project-coordination.md) and [optional host adapters](references/host-adapters.md), loaded only when needed.
 
+## Memory Governance in v0.10.0 — learn from corrections without extra setup
+
+AIOS now distinguishes a **temporary reaction**, a **confirmed scoped preference**, a **verified fact**, and an **untested workaround**. It does not convert every compliment or one-off fix into a permanent project-wide rule. Important guidance may be `candidate`, `active`, or `superseded/retired`; these are internal applicability states, **not** claims that a personal statement or external fact was independently proven.
+
+When a shared fact or working rule changes, AIOS keeps one discoverable current authority in the appropriate scope, retains recoverable history and source pointers, and flags relevant downstream work for review rather than silently changing other drafts. Reproducible failures can become narrowly applicable troubleshooting knowledge, with exact environment and limits.
+
+Verification is proportional to the task: **persistence** (did the file save?), **retrieval** (did the new Agent actually read the current record?), and **application** (did the real deliverable obey it?). A matching file hash, an installed Skill, or a model saying "I remember" alone does not establish successful cross-device or cross-session use.
+
+**No new user commands, mandatory governance files, registry, recurring jobs, or manager Agent.** Routine projects stay simple; deeper rules are loaded only for substantive feedback, conflicting memories, important deliverables or cross-host checks. See [governance reference](references/memory-governance.md) and [manual evaluation scenarios](evals/memory-governance.md). Behavior still depends on the host Agent actually reading and following saved instructions; real cross-session reliability is not guaranteed merely by contract tests.
+
 ## Automatic migration of existing project memory
 
-When an updated, trusted AIOS Skill is **actually loaded** in a writable project, it can inspect the project's existing instructions and memory, detect obsolete structures, and **automatically apply safe, reversible adjustments**. It preserves the original data, repairs navigation and checks that new sessions can find the correct scope. A small marker in the project entrypoint (e.g. `AIOS memory policy: 0.9.0`) identifies the latest successfully applied policy; merely installing a new Skill version does **not** advance it.
+When an updated, trusted AIOS Skill is **actually loaded** in a writable project, it can inspect the project's existing instructions and memory, detect obsolete structures, and **automatically apply safe, reversible adjustments**. It preserves the original data, repairs navigation and checks that new sessions can find the correct scope. A small marker in the project entrypoint (e.g. `AIOS memory policy: 0.10.0`) identifies the latest successfully applied policy; merely installing a new Skill version does **not** advance it.
 
 **Not a background updater:** Updating the CLI-installed Skill does not automatically change old `AGENTS.md`/`CLAUDE.md` files. A legacy project must load/invoke the updated Skill at least once to bootstrap this behavior; afterward a generated entrypoint can check locally available Skill instructions on later sessions. If the installed Skill is unavailable, the project continues to work using existing instructions rather than claiming a version check.
 
