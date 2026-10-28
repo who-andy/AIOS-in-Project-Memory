@@ -22,7 +22,7 @@ class SkillContractTests(unittest.TestCase):
         self.assertGreater(len(metadata["description"]), 10)
         self.assertLessEqual(len(metadata["description"]), 1024)
         self.assertLessEqual(len(metadata["compatibility"]), 500)
-        self.assertIn('version: "0.9.0"', self.front)
+        self.assertIn('version: "0.10.0"', self.front)
         self.assertLessEqual(len(self.body.splitlines()), 500)
 
     def test_frontmatter_is_parseable_by_real_yaml_parser(self):
@@ -35,7 +35,7 @@ class SkillContractTests(unittest.TestCase):
         self.assertTrue(parsed["description"].strip())
         self.assertLessEqual(len(parsed["description"]), 1024)
         self.assertIsInstance(parsed["compatibility"], str)
-        self.assertEqual(parsed["metadata"]["version"], "0.9.0")
+        self.assertEqual(parsed["metadata"]["version"], "0.10.0")
         with self.assertRaises(yaml.YAMLError):
             yaml.safe_load("""name: sample
 description: something with needs: a fix
@@ -257,7 +257,7 @@ description: something with needs: a fix
             "version-aware self-migration",
             "trigger, not a background daemon",
             "minimal version handshake",
-            "aios memory policy: 0.9.0",
+            "aios memory policy: 0.10.0",
             "bootstrap realities",
             "inspect, classify and plan before writes",
             "auto-apply reversible changes only",
@@ -300,6 +300,69 @@ description: something with needs: a fix
             with self.subTest(scenario=phrase):
                 self.assertIn(phrase, doc)
         self.assertIn("without invoking the new skill", doc)
+
+    def test_memory_governance_is_scoped_and_nonintrusive(self):
+        core = self.content.lower()
+        for term in [
+            "memory governance: learn from corrections",
+            "operational status and factual confidence are separate",
+            "candidate → active → superseded/retired",
+            "one applicable authority",
+            "reproducible failure",
+            "risk- and task-triggered",
+            "references/memory-governance.md",
+            "no new knowledge registry",
+        ]:
+            with self.subTest(term=term):
+                self.assertIn(term, core)
+        doc = (ROOT / "references" / "memory-governance.md").read_text(encoding="utf-8").lower()
+        for term in [
+            "epistemic/source axis", "operational/decision axis",
+            "candidate", "active", "superseded/retired",
+            "one canonical current authority", "user-reported",
+            "no mandatory status field", "one-time exception",
+            "one successful command", "cross-device",
+        ]:
+            with self.subTest(term=term):
+                self.assertIn(term, doc)
+
+    def test_memory_governance_validation_levels(self):
+        doc = (ROOT / "references" / "memory-governance.md").read_text(encoding="utf-8").lower()
+        for phrase in [
+            "tier 1 — persistence",
+            "tier 2 — retrieval",
+            "tier 3 — application",
+            "file sync", "entrypoint presence",
+            "real output", "cost gating",
+            "does not prove", "do not claim",
+        ]:
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, doc)
+        self.assertIn("validate application against actual deliverables", self.content.lower())
+
+    def test_memory_governance_regressions_are_defined_not_claimed(self):
+        p = ROOT / "evals" / "memory-governance.md"
+        self.assertTrue(p.exists())
+        doc = p.read_text(encoding="utf-8").lower()
+        for phrase in [
+            "manual protocols only", "zero-cost default", "one-off approval",
+            "fact confidence", "canonical authority", "preserve scope",
+            "bounded applicability", "evidence ladder", "false synchronization",
+            "concurrent writers", "no-access", "v0.9 → v0.10", "real installation",
+            "do not",
+        ]:
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, doc)
+
+    def test_version_marker_and_readmes_agree_for_governance(self):
+        self.assertIn('version: "0.10.0"', self.front)
+        self.assertIn("AIOS memory policy: 0.10.0", self.content)
+        en = (ROOT / "README.md").read_text(encoding="utf-8")
+        zh = (ROOT / "README.zh-CN.md").read_text(encoding="utf-8")
+        self.assertIn("Memory Governance", en)
+        self.assertIn("记忆治理", zh)
+        self.assertIn("memory-governance.md", en)
+        self.assertIn("memory-governance.md", zh)
 
     def test_project_coordination_default_is_lightweight(self):
         expected = [
