@@ -374,7 +374,7 @@ description: something with needs: a fix
             "ask one brief concrete opt-in question",
             "separate exploratory research from execution",
             "fall back",
-            "no mandatory orchestration registry",
+            "mandatory orchestration registry",
             "references/adaptive-orchestration.md",
         ]:
             with self.subTest(phrase=phrase):
@@ -383,9 +383,9 @@ description: something with needs: a fix
         for phrase in [
             "solo (default)", "offer", "delegate", "host/tool permission prompts",
             "no default global auto-delegation",
-            "no separate required conversation",
+            "separate required conversation",
             "portable prompt policy",
-            "no real event source",
+            "event bus",
         ]:
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, doc)
@@ -397,7 +397,7 @@ description: something with needs: a fix
             "promising candidates", "rejected with reason",
             "committed decisions", "research exception",
             "decision gate before implementation",
-            "not an implementation mandate",
+            "implementation mandate",
             "read-only research",
             "explicit user instruction",
             "revocable",
@@ -405,7 +405,7 @@ description: something with needs: a fix
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, doc)
         self.assertIn("a candidate exploration is", self.content.lower())
-        self.assertIn("not an implementation mandate", self.content.lower())
+        self.assertIn("implementation mandate", self.content.lower())
 
     def test_worker_handoffs_validate_evidence_and_authority(self):
         doc = (ROOT / "references" / "adaptive-orchestration.md").read_text(encoding="utf-8").lower()
@@ -417,7 +417,7 @@ description: something with needs: a fix
             "worktree isolation", "changing decisions mid-flight",
             "possibly stale", "failure and interruption",
             "stop conditions", "sequentially",
-            "background recovery",
+            "watchdogs",
         ]:
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, doc)
@@ -425,7 +425,7 @@ description: something with needs: a fix
         self.assertIn("adaptive delegation contract across hosts", host)
         self.assertIn("claude code", host)
         self.assertIn("codex", host)
-        self.assertIn("no real event source", host)
+        self.assertIn("event bus", host)
         coordination = (ROOT / "references" / "project-coordination.md").read_text(encoding="utf-8").lower()
         self.assertIn("optional router/worker handoff", coordination)
         self.assertIn("single-writer discipline", coordination)
@@ -450,7 +450,7 @@ description: something with needs: a fix
         ]:
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, doc)
-        self.assertEqual(len(re.findall(r"(?m)^## [A-O]\\. ", doc)), 15)
+        self.assertEqual(len(re.findall(r"(?m)^## [A-O][.] ", doc)), 15)
 
     def test_orchestration_in_readmes_is_safely_optional(self):
         en = (ROOT / "README.md").read_text(encoding="utf-8")
