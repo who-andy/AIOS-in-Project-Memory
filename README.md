@@ -142,6 +142,22 @@ Verification is proportional to the task: **persistence** (did the file save?), 
 
 **No new user commands, mandatory governance files, registry, recurring jobs, or manager Agent.** Routine projects stay simple; deeper rules are loaded only for substantive feedback, conflicting memories, important deliverables or cross-host checks. See [governance reference](references/memory-governance.md) and [manual evaluation scenarios](evals/memory-governance.md). Behavior still depends on the host Agent actually reading and following saved instructions; real cross-session reliability is not guaranteed merely by contract tests.
 
+## Adaptive Orchestration in v0.11.0 (optional)
+
+**Keep talking to the same Main Agent.** Early brainstorming can include dozens of loose or rejected ideas. AIOS keeps only consequential candidates, rationale for important rejected options, and **decisions you actually commit to**. A stray thought never authorizes implementation.
+
+When multiple **independent, well-defined** investigations or tasks would materially benefit from native Subagents, AIOS can make **one concise offer** to run them in parallel. If you approve, or have already explicitly authorized that limited kind of delegation in the project, the Main Agent can coordinate available workers, verify their evidence and integrate useful results into the existing project memory. **Solo remains the default.** Users do not need a Router chat, separate Skill, new command or permanent task registry.
+
+Research on a candidate stays research: no code changes or architecture commitment without appropriate direction. Changes to approved requirements while workers run are reconciled rather than silently applied; if the host cannot actually stop a worker, AIOS marks its output potentially stale instead of claiming cancellation.
+
+**Portable between Claude Code and Codex:** the routing policy and handoff rules are shared, while native worker creation depends on the actual version, tools, permissions, workspace visibility and approved cost. If unavailable, work proceeds sequentially in the Main Agent. No daemon, event bus, 24/7 watching, automatic background recovery or cross-session messaging service is installed by this Skill.
+
+Example natural-language request:
+
+> We are still brainstorming. Keep speculative ideas separate from committed decisions. If parallel read-only research would significantly improve a comparison, ask me once before using native subagents. When we approve the design, coordinate independent implementation tasks only within my authorized scope.
+
+More detail: [adaptive orchestration rules](references/adaptive-orchestration.md), [host support](references/host-adapters.md), [behavior evaluations](evals/adaptive-orchestration.md). Real parallel work and quality improvement require host-specific testing; installation CI alone cannot prove them.
+
 ## Automatic migration of existing project memory
 
 When an updated, trusted AIOS Skill is **actually loaded** in a writable project, it can inspect the project's existing instructions and memory, detect obsolete structures, and **automatically apply safe, reversible adjustments**. It preserves the original data, repairs navigation and checks that new sessions can find the correct scope. A small marker in the project entrypoint (e.g. `AIOS memory policy: 0.10.0`) identifies the latest successfully applied policy; merely installing a new Skill version does **not** advance it.
