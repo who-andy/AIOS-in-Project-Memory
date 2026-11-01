@@ -14,6 +14,8 @@ These are **unscored scenarios**, not claims of proven performance. Run on each 
 
 **v0.10.0 memory governance and usable continuity:** [memory-governance.md](memory-governance.md). Tests scoped feedback promotion, separate source trust and rule lifecycle, canonical replacements, failure reuse, three-tier verification, cross-device proof boundaries, and non-destructive migration.
 
+**v0.11.0 adaptive orchestration and brainstorming:** [adaptive-orchestration.md](adaptive-orchestration.md). Tests quiet single-Agent defaults, candidate-only research, consent gating, delegated task evidence, conflicting Workers, new decisions during execution, Claude/Codex capability fallback and truthful recovery.
+
 | Scenario | Pass condition |
 |---|---|
 | One-time approval versus reusable guidance | A draft acceptance remains local; a clear lasting preference applies only to its stated scope |
