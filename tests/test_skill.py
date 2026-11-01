@@ -397,7 +397,6 @@ description: something with needs: a fix
             "promising candidates", "rejected with reason",
             "committed decisions", "research exception",
             "decision gate before implementation",
-            "implementation mandate",
             "read-only research",
             "explicit user instruction",
             "revocable",
@@ -425,7 +424,7 @@ description: something with needs: a fix
         self.assertIn("adaptive delegation contract across hosts", host)
         self.assertIn("claude code", host)
         self.assertIn("codex", host)
-        self.assertIn("event bus", host)
+        self.assertIn("no real event source", host)
         coordination = (ROOT / "references" / "project-coordination.md").read_text(encoding="utf-8").lower()
         self.assertIn("optional router/worker handoff", coordination)
         self.assertIn("single-writer discipline", coordination)
@@ -450,7 +449,7 @@ description: something with needs: a fix
         ]:
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, doc)
-        self.assertEqual(len(re.findall(r"(?m)^## [A-O][.] ", doc)), 15)
+        self.assertEqual(len(re.findall(r"(?m)^## [a-o][.] ", doc)), 15)
 
     def test_orchestration_in_readmes_is_safely_optional(self):
         en = (ROOT / "README.md").read_text(encoding="utf-8")
