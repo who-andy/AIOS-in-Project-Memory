@@ -22,7 +22,7 @@ class SkillContractTests(unittest.TestCase):
         self.assertGreater(len(metadata["description"]), 10)
         self.assertLessEqual(len(metadata["description"]), 1024)
         self.assertLessEqual(len(metadata["compatibility"]), 500)
-        self.assertIn('version: "0.10.0"', self.front)
+        self.assertIn('version: "0.11.0"', self.front)
         self.assertLessEqual(len(self.body.splitlines()), 500)
 
     def test_frontmatter_is_parseable_by_real_yaml_parser(self):
@@ -35,7 +35,7 @@ class SkillContractTests(unittest.TestCase):
         self.assertTrue(parsed["description"].strip())
         self.assertLessEqual(len(parsed["description"]), 1024)
         self.assertIsInstance(parsed["compatibility"], str)
-        self.assertEqual(parsed["metadata"]["version"], "0.10.0")
+        self.assertEqual(parsed["metadata"]["version"], "0.11.0")
         with self.assertRaises(yaml.YAMLError):
             yaml.safe_load("""name: sample
 description: something with needs: a fix
@@ -257,7 +257,7 @@ description: something with needs: a fix
             "version-aware self-migration",
             "trigger, not a background daemon",
             "minimal version handshake",
-            "aios memory policy: 0.10.0",
+            "aios memory policy: 0.11.0",
             "bootstrap realities",
             "inspect, classify and plan before writes",
             "auto-apply reversible changes only",
@@ -355,14 +355,113 @@ description: something with needs: a fix
                 self.assertIn(phrase, doc)
 
     def test_version_marker_and_readmes_agree_for_governance(self):
-        self.assertIn('version: "0.10.0"', self.front)
-        self.assertIn("AIOS memory policy: 0.10.0", self.content)
+        self.assertIn('version: "0.11.0"', self.front)
+        self.assertIn("AIOS memory policy: 0.11.0", self.content)
         en = (ROOT / "README.md").read_text(encoding="utf-8")
         zh = (ROOT / "README.zh-CN.md").read_text(encoding="utf-8")
         self.assertIn("Memory Governance", en)
         self.assertIn("记忆治理", zh)
         self.assertIn("memory-governance.md", en)
         self.assertIn("memory-governance.md", zh)
+
+    def test_adaptive_orchestration_is_optional_and_host_agnostic(self):
+        core = self.content.lower()
+        for phrase in [
+            "adaptive orchestration: optional router",
+            "the main agent remains the user's discussion partner",
+            "router is an optional role",
+            "solo / offer / delegate",
+            "ask one brief concrete opt-in question",
+            "separate exploratory research from execution",
+            "fall back",
+            "no mandatory orchestration registry",
+            "references/adaptive-orchestration.md",
+        ]:
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, core)
+        doc = (ROOT / "references" / "adaptive-orchestration.md").read_text(encoding="utf-8").lower()
+        for phrase in [
+            "solo (default)", "offer", "delegate", "host/tool permission prompts",
+            "no default global auto-delegation",
+            "no separate required conversation",
+            "portable prompt policy",
+            "no real event source",
+        ]:
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, doc)
+
+    def test_brainstorming_and_worker_mandates_are_separate(self):
+        doc = (ROOT / "references" / "adaptive-orchestration.md").read_text(encoding="utf-8").lower()
+        for phrase in [
+            "brainstorming is exploration", "raw thoughts",
+            "promising candidates", "rejected with reason",
+            "committed decisions", "research exception",
+            "decision gate before implementation",
+            "not an implementation mandate",
+            "read-only research",
+            "explicit user instruction",
+            "revocable",
+        ]:
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, doc)
+        self.assertIn("a candidate exploration is", self.content.lower())
+        self.assertIn("not an implementation mandate", self.content.lower())
+
+    def test_worker_handoffs_validate_evidence_and_authority(self):
+        doc = (ROOT / "references" / "adaptive-orchestration.md").read_text(encoding="utf-8").lower()
+        for phrase in [
+            "task identity", "mandate", "known inputs", "isolation and ownership",
+            "definition of done", "return path",
+            "observed status", "artifacts", "revision ids",
+            "single authority for shared state",
+            "worktree isolation", "changing decisions mid-flight",
+            "possibly stale", "failure and interruption",
+            "stop conditions", "sequentially",
+            "background recovery",
+        ]:
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, doc)
+        host = (ROOT / "references" / "host-adapters.md").read_text(encoding="utf-8").lower()
+        self.assertIn("adaptive delegation contract across hosts", host)
+        self.assertIn("claude code", host)
+        self.assertIn("codex", host)
+        self.assertIn("no real event source", host)
+        coordination = (ROOT / "references" / "project-coordination.md").read_text(encoding="utf-8").lower()
+        self.assertIn("optional router/worker handoff", coordination)
+        self.assertIn("single-writer discipline", coordination)
+
+    def test_orchestration_evals_cover_host_fallback_and_recovery(self):
+        doc = (ROOT / "evals" / "adaptive-orchestration.md").read_text(encoding="utf-8").lower()
+        for phrase in [
+            "unscored experimental scenarios",
+            "brainstorming contains many junk ideas",
+            "candidate-only research",
+            "explicit opt-in",
+            "decline, unsupported host",
+            "worktree and snapshot",
+            "user changes design while workers run",
+            "conflicting research",
+            "worker interruption",
+            "permission and budget",
+            "claude code and codex",
+            "v0.10 to v0.11 migration",
+            "real packaging and test boundary",
+            "not run",
+        ]:
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, doc)
+        self.assertEqual(len(re.findall(r"(?m)^## [A-O]\\. ", doc)), 15)
+
+    def test_orchestration_in_readmes_is_safely_optional(self):
+        en = (ROOT / "README.md").read_text(encoding="utf-8")
+        zh = (ROOT / "README.zh-CN.md").read_text(encoding="utf-8")
+        for filename, txt, terms in [
+            ("README.md", en.lower(), ["adaptive orchestration in v0.11.0", "solo remains the default", "references/adaptive-orchestration.md"]),
+            ("README.zh-CN.md", zh, ["v0.11.0：自适应多 Agent 协作", "默认仍使用单 Agent", "references/adaptive-orchestration.md"]),
+        ]:
+            for term in terms:
+                with self.subTest(file=filename, term=term):
+                    self.assertIn(term, txt)
 
     def test_project_coordination_default_is_lightweight(self):
         expected = [
