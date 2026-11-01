@@ -1,6 +1,6 @@
 # Optional host-aware enhancements (Claude Code and Codex)
 
-**Read only** when the user explicitly requests scheduling/monitoring, a host-specific persistence safeguard, multi-agent delegation, or when the current workspace genuinely needs such an integration. AIOS's core memory remains usable without these features. At runtime, inspect the actual host, version, feature flags, permissions, tools and accessible project path; public documentation does not prove the current installation exposes a feature. Never fabricate a tool command or claim to have registered a task/hook until the host confirms it.
+**Read only** when the user explicitly requests scheduling/monitoring, a host-specific persistence safeguard, multi-agent delegation, or a genuine independent-work opportunity warrants a one-time delegation offer, or when the current workspace needs such an integration. AIOS's core memory remains usable without these features. At runtime, inspect the actual host, version, feature flags, permissions, tools and accessible project path; public documentation does not prove the current installation exposes a feature. Never fabricate a tool command or claim to have registered a task/hook until the host confirms it.
 
 ## Capability matrix: understand surfaces, not just brand names
 
@@ -19,6 +19,24 @@ Official reference pages (recheck before configuration):
 - Codex app and long-term workflow: https://developers.openai.com/blog/run-long-horizon-tasks-with-codex
 - Codex managed Agents API scheduled automations: https://developers.openai.com/api/docs/guides/agents-api/sessions/automations
 - Multi-agent in the Agents API: https://developers.openai.com/api/docs/guides/agents-api/multi-agent
+
+## Adaptive delegation contract across hosts
+
+When optional [adaptive orchestration](adaptive-orchestration.md) becomes relevant, **separate what AIOS decides from what the host can execute**. Detect the real native delegation affordance, message-return mechanism, workspace/revision visibility, authorization model and cost boundary before choosing native Worker execution. A host name or feature announcement is never evidence that the current session has those tools.
+
+| Decision | Portable AIOS policy | Host-specific responsibility |
+| --- | --- | --- |
+| Should work be split? | Solo by default; offer only for meaningful independent work | Tell AIOS whether native delegation is actually available |
+| Can it run? | Check explicit scoped current/prior consent, budget and safety | Enforce real tool/host permissions and launch tasks |
+| What must Worker know? | Goal, current approved scope, inputs/revision, read/write bounds, expected evidence, stopping conditions | Translate to native task or subagent options |
+| Where do results go? | Main Agent verifies, then updates canonical AIOS memory | Deliver the report through a real channel, or expose a file the Main Agent can read |
+| What if unavailable? | Continue sequentially, no invented Worker status | Return an unsupported/blocked result |
+
+For Claude Code, use supported Subagent/Agent Team features only when exposed in this particular runtime. For Codex, use its currently exposed multi-agent and worktree facilities; do not assume a particular CLI command or remote API is available. Generic hosts can implement the same task contract with sequential work. Never silently install a plugin or runtime to make delegation possible.
+
+**Consent distinguishes exploration from execution.** Read-only research on a candidate may be scoped and pre-authorized; changing code, installing dependencies, pushing a branch, sending messages or triggering high-cost work requires the actual user's and host's applicable permission. If the user declines an offer, record that for the current task and stop suggesting it until materially different work warrants it.
+
+**No real event source, no autonomous recovery.** A session-local subagent does not become a 24/7 Router. CI comments, pull requests, email triggers, unattended retries and watchdogs require separately connected infrastructure and permission. AIOS can persist handoffs and resumable status without claiming that an interrupted Worker continues in the background.
 
 ## Runtime selection
 
@@ -66,3 +84,7 @@ Hooks can make recovery checkpoints more likely but never replace the in-convers
 - Requested recurring report: run confirmed in supported host and can access files; no claim if unsupported.
 - Remote vs local mismatch: give an honest limitation and safe alternative.
 - Two independent workers: no silent shared-file overwrite, and next session sees verified merged status.
+- No exposed delegation tool: Main Agent performs the task sequentially, and reports no Worker was launched.
+- Brainstorming with unresolved requirements: no implementation Worker is launched on speculative ideas.
+- Scoped research permission: an authorized read-only investigation is possible; deployment remains blocked without separate approval.
+- New architectural decision while Worker is active: use available stop/replan tools, or flag its output as stale and verify before integration.
