@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.11.0 (2026-11-01)
+
+- Added **Adaptive Orchestration** as a strictly optional Router role inside the existing AIOS Skill. Users keep one Main Agent chat for brainstorming and ordinary work; no extra standalone Skill, manager session or persistent Router process.
+- Defined a **solo / offer / delegate** gate. AIOS may ask once when independent well-defined work warrants native agents, but delegation requires specific user consent or sufficiently scoped prior opt-in, real host capability and acceptable resource/permission boundaries.
+- Added **exploration hygiene**: discard fleeting junk ideas, selectively capture promising candidates and important rejected options with reasons, and never treat uncommitted ideas as implementation authority. Allow read-only research on candidates without committing a design.
+- Added portable worker handoffs covering scope, evidence/revision, file ownership, authorization, deliverables, acceptance criteria, cost and return channel; Main Agent verifies actual outputs before updating canonical project memory.
+- Defined mid-flight revision handling, staleness marking, concurrency discipline, and honest sequential fallback for unsupported host environments. No invented 24/7 event bus, watchdog or background recovery.
+- Kept host-neutral decision policy compatible with Claude Code and Codex through native runtime features when present. Progressive references live in [adaptive orchestration](references/adaptive-orchestration.md), [host adapters](references/host-adapters.md) and [project coordination](references/project-coordination.md).
+- Added [15 manual behavioral scenarios](evals/adaptive-orchestration.md), package contract tests, bilingual docs and verified-policy marker update to `0.11.0`. Legacy projects migrate only after loading updated instructions, preserving existing memory and unfinished ideas.
+- Static and CLI installation tests are package validation, **not** claims of measured multi-Agent success, speedup or reliable unattended operation.
+
 ## 0.10.0 (2026-10-28)
 
 - Added **Memory Governance** as optional, progressively loaded [guidance](references/memory-governance.md) to help AIOS convert useful feedback into scoped, reliable project instructions without a mandatory new registry, UI or setup steps.
