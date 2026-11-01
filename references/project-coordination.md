@@ -26,6 +26,14 @@ At entry and meaningful milestones:
 
 Status transitions should be grounded: a task is `done` only if its explicitly relevant acceptance evidence supports it; `blocked` names the blocker; `waiting` identifies who/what is expected. Use statuses only for meaningful multi-task work; no status machinery for casual chats.
 
+## Optional Router/Worker handoff without permanent manager state
+
+When [adaptive orchestration](adaptive-orchestration.md) is authorized and relevant, the Main Agent can temporarily coordinate native Workers while keeping the canonical project memory independent of their chat contexts. Reuse this existing project pulse and scoped checkpoints; do not add a compulsory job database or always-on Router conversation.
+
+For a meaningful delegated job, keep its approved goal and constraints, scoped owner, relevant revision/snapshot, output/return route, actual observed status, verifiable result and pending next action discoverable where needed. Avoid copying private full prompts and chat logs into a shared index. Unverified Worker self-report stays tentative until the Main Agent checks the relevant artifacts or test evidence. An ended session is not assumed to be a still-running background job.
+
+**Single-writer discipline:** independent Workers own separate artifacts or worktrees; the Main Agent normally integrates verified outcomes and updates common AIOS knowledge. Separate worktrees may not see one another's changes until merged. New accepted project decisions can invalidate older Worker assumptions; mark affected tasks for recheck, use supported stop/replan controls only with authority, and do not silently accept a stale deliverable.
+
 ## Cross-session change notices without an always-on controller
 
 On a shared fact/interface/constraint update, record a brief **change note** at the canonical source: old/new value where safe, evidence, time or revision, affected known scopes, and pending review. Keep links from potentially dependent scopes or a small pending-review section in existing navigation. Other Agents find it on their **next authorized visit**; no promise of instant notification or spontaneous background intervention. When a host provides real messaging or scheduling, optional delivery may supplement this durable record, but must not replace it.
