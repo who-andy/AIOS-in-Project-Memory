@@ -1,39 +1,37 @@
-# PS Evaluator Skill v0.1.0
+# PS Evaluator Skill v0.2.0
 
-针对香港本科 Personal Statement 的**专业匹配型评估 Skill**，目前包含 HKU BBA Accounting and Finance、HKUST BSc Economics and Finance 两份官方资料来源明确的专业画像。
+本科个人陈述评估 Skill，采用**动态专业研究**模式，适用于港五及其他大学。Skill 内不预置 HKU、HKUST 等特定 Major 的固定画像，也不会杜撰各校内部 PS 评分权重。
 
-工作内容：通用质量评分（70 分）、专业匹配度评分（30 分）、同篇文书跨专业比较、两个版本盲评，以及多评委结果汇总和一致性诊断。
+## 工作流程
 
-**适用边界**：这套权重是实验设计，并非香港高校官方评分标准。90 分和 80 分不对应可计算的录取概率。Skill 不会自动调用 Claude/GPT 的 API。语言模型负责作出有证据支持的定性判断，本地脚本负责校验、汇总与计算。
+1. 确认大学、准确专业名称、入学年份、申请途径，以及同一篇 PS 是否覆盖多个志愿。
+2. 使用可用的搜索能力查找官方英文招生要求和专业培养目标。分别记录提交规则、课程事实、推导出的专业相关能力、未解决事项及资料来源。
+3. 先用统一 Rubric 评价文章本身的质量（70 分），再针对**每个目标专业**单独评价匹配度（30 分）。70/30 是研究用途的实验权重，不代表港校官方标准。
+4. 输出原文证据、评分理由、重要问题、各专业匹配度、可靠性提示及来源。若无法核实官方专业资料，只输出通用评估或注明专业评分暂不可靠。
+5. 支持不同版本比较、同一文书跨专业比较和 Benchmark 一致性测试。
 
 ## 安装
 
-将完整 `ps-evaluator` 文件夹复制至 Agent Skills 目录：
+```bash
+npx skills add who-andy/AIOS-in-Project-Memory --skill ps-evaluator
+```
 
-- Codex：`~/.agents/skills/ps-evaluator/`，或项目下 `.agents/skills/ps-evaluator/`。
-- Claude Code：`~/.claude/skills/ps-evaluator/`，或项目下 `.claude/skills/ps-evaluator/`。
+也可以将 `skills/ps-evaluator/` 放到 Claude Code 的 `~/.claude/skills/ps-evaluator/` 或 Codex 的 `~/.agents/skills/ps-evaluator/`。Skill 不依赖 AIOS，不需要默认购买模型 API。
 
-如果从 AIOS 仓库获取，仅复制 `skills/ps-evaluator` 即可。此 Skill 运行不依赖 AIOS。
+## 调用例子
 
-## 使用
+> 使用 ps-evaluator 评估我的 2027 年国际 A-Level 申请 PS，目标为[大学][完整专业名]。先核对官方英文招生规定和课程结构，给出出处，再评价文章质量和专业匹配度。如果同一篇 PS 覆盖两个志愿，分别检查两者。
 
-对 Agent 说：`使用 ps-evaluator 评估这篇 PS，目标是 HKUST BSc Economics and Finance。逐项引用原文证据，并评估专业匹配度。`
-
-亦可让 Agent 比较两篇 PS，或让同一篇 PS 分别面向 HKU Acc&Fin、HKUST ECOF 评估。
-
-## 测试与脚本
-
-在本目录运行：
+## 结构检查
 
 ```bash
+cd skills/ps-evaluator
 python3 scripts/validate_profiles.py --root .
 python3 -m unittest discover -s tests -v
 python3 scripts/aggregate_scores.py --rubrics . --input examples/evaluations.synthetic.json
 python3 scripts/benchmark.py --input examples/benchmark.synthetic.json
 ```
 
-以上脚本均使用 Python 3 标准库，测试输入为虚构样本。它们检查数据格式、计算分数与描述性一致性，**不代表已经经过人类招生官校准**。
+Python 脚本验证评分格式、求和和评委分歧，不负责上网、调用 AI 或验证录取概率。示例样本均为虚构数据。详细规则见 `references/research-protocol.md` 和 `references/output-schema.md`。
 
-学校课程信息和我们推导的评分关注点分别存储，并记录来源网址及核实日期。申请规则可能变化，真实使用前需要再次查看大学官方英文页面。
-
-**隐私**：不得擅自把申请人的真实 PS、个人资料或评估结果上传公开仓库。
+真实 PS、申请人资料、个人化评估报告不得擅自提交到公共 GitHub。

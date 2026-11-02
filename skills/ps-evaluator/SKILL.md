@@ -1,46 +1,48 @@
 ---
 name: ps-evaluator
-description: Review and compare undergraduate personal statements using evidence-grounded writing rubrics and university-major profiles. Use for Hong Kong undergraduate PS evaluation, major-fit analysis, pairwise comparisons, and scoring reliability checks.
+description: Evaluate and compare undergraduate personal statements with evidence-based writing criteria and live, programme-specific university research. Use for Hong Kong or other undergraduate PS review, programme fit, multi-choice statements, and evaluation reliability tests.
 ---
 
 # PS Evaluator
 
-Evaluate a personal statement as a piece of evidence about an applicant's intellectual development and programme fit. Never claim that the experimental scores are university admissions scores or predict admission probability.
+An evidence-grounded, research-first PS evaluation skill. The same Skill handles different universities, programmes, application routes and intake years. It does **not** contain university-specific grading weights or assume that every university gives a PS the same admissions importance.
 
-## Before scoring
+## Intake and research: required before programme-fit scoring
 
-1. Determine the **exact university, programme name, qualification route, intake year**, and whether a single PS serves multiple choices. Ask only for missing information that materially blocks a valid programme assessment; otherwise state assumptions and continue.
-2. Read `references/methodology.md`, `rubrics/universal.json`, `rubrics/major_fit.json`, and the relevant profile in `profiles/`. Treat profile assessment signals as **researcher interpretations**, not official admissions criteria.
-3. Check the `verified_on` date and official `sources` in the profile. For time-sensitive requirements, verify against current official university English-language sources if browsing is available. If verification is unavailable or a profile is missing/stale, disclose it and use an explicitly provisional major fit assessment. Never invent admission requirements.
-4. For user-provided statements, preserve privacy. Do not publish, upload, or add them to an external/public repository without explicit permission. All bundled samples are synthetic.
+1. Identify the target **university**, **exact programme title**, **intake year**, **qualification/admissions route**, and **all programme choices sharing this statement**. Prefer the supplied application details; ask only if a missing distinction materially changes the evaluation. A school name alone is insufficient when programme requirements vary.
+2. Read `references/research-protocol.md`, `references/methodology.md`, `rubrics/universal.json`, and `rubrics/major_fit.json`. Research the live, official, English-language university admissions pages and target programme/department curriculum pages if browsing is available. Search admissions instructions first, then programme learning objectives/courses, then official subject prerequisites and interview/portfolio information if relevant. Never substitute generic search snippets for exact requirements when the full official page is accessible.
+3. Produce a **dynamic programme research snapshot** following `references/research-protocol.md`. Separate (a) directly sourced official application requirements, (b) official curriculum descriptions, (c) researcher-inferred `major_signals`, and (d) unknowns. Save a locally generated snapshot outside the installed Skill when the user has a writable project; otherwise include a short source-linked snapshot in the report. No bundled school profile is mandatory.
+4. Confirm which admissions route the rules cover. Record URLs and retrieval date; do not imply an undated or earlier-cycle page governs the user's intake. If research tools are unavailable, sources contradict each other, or the programme cannot be verified, mark `research_status: partial` or `unavailable`, explicitly lower confidence, and do not invent a word limit or marking criteria. You may still provide universal-only scoring, with programme fit marked provisional or omitted.
+5. Inspect whether **one shared PS** must serve several programme choices. Evaluate the same original prose once under the universal rubric, then assess fit and coverage for each relevant programme independently. Distinguish school-level submission constraints from programme-level preparation signals.
 
-## Evaluate mode
+## Evaluate
 
-1. Read the entire PS before scoring. Note submission constraints only if verified for the route and year; flag word count, inconsistencies, inaccurate terminology, and high-risk claims separately.
-2. Score every universal criterion using `rubrics/universal.json`, then each fit criterion using `rubrics/major_fit.json`, on integer scales from 0 to maximum points. The anchors are qualitative guidance, not fake psychometric calibration.
-3. For each criterion, provide `score`, a concise `rationale`, and 1–2 **verbatim quotations** from the PS as evidence. Distinguish missing evidence from weak evidence. If there is no support, set `evidence` to [] and explain the deduction.
-4. Apply `major_signals` from the programme profile to interpret fit without keyword counting. Demonstrated reasoning matters more than name-dropping courses. A strong finance project may have limited evidence for economics; do not assume otherwise.
-5. Report high-risk concerns separately: unsupported accomplishments, contradiction, misuse of academic concepts, material factual problems, and unverified constraints. Do not silently correct the student's biography.
-6. **No admission prediction.** Never turn a 90 vs 80 PS score into estimated offers or acceptance percentages. Report score uncertainty and the non-validated nature of weights.
-7. Produce a clear report with (a) universal subtotal /70, (b) major fit subtotal /30, (c) provisional total /100, (d) strongest evidence, (e) highest-impact changes, (f) risks, (g) profile source URLs and verification state.
-8. If structured evaluation data is needed for aggregation, use the JSON schema described in `references/output-schema.md`, then run `python3 scripts/aggregate_scores.py --rubrics . --input evaluations.json --output report.json`. Do not fabricate evaluator runs.
+1. Read the entire PS. Report *verified* length/format/prompt constraints separately from subjective quality scores. Flag material factual inconsistencies, unsupported claims to verify, academic misuse, and missing programme coverage without inventing biographical facts.
+2. Use `rubrics/universal.json` for shared PS quality (0–70) and `rubrics/major_fit.json` for programme fit (0–30). **70/30 is an experimental editorial design**, not any university's internal weight. Do not make the numerical breakdown contingent on a guessed university preference. If a verified published assessment rubric exists, report it separately and explicitly; never silently overwrite the comparative 70/30 baseline.
+3. Judge fit from **accurate disciplinary understanding, relevant reasoning/evidence, and plausible academic direction** tied to verified programme context. Do not reward course name-dropping, prestige, jargon, or raw achievement counts. Major signals are heuristic interpretations, never official admissions criteria unless literally published as such.
+4. For every criterion give an integer score, 1–2 short exact PS quotations where available, and a concise rationale. Unsupported criteria receive `evidence: []` and an explanation. Keep grounded uncertainty visible. Do not infer originality, truth or personal characteristics from prose style.
+5. Provide universal subtotal, per-programme fit subtotal, optional experimental total, evidence-backed strengths, prioritized substantive changes, submission checks, source URLs and research status. When major research is unavailable, present a **universal-only** assessment and do not imply a validated major-fit score.
+6. Never translate PS 90/100 vs 80/100 into admissions probabilities, offer predictions or fixed school-specific importance. Academic qualifications, references, interviews and programme context can matter independently.
 
-## Compare mode
+## Modes
 
-1. Anonymize labels to A/B. Independently evaluate each under the **same target major** and rubric version.
-2. Compare substantive evidence and major fit before discussing prose polish. Explicitly check if the difference is bigger than scoring disagreement.
-3. Reverse A/B presentation order in a second judge pass when possible; log judge identity, date, and model/version. Avoid treating multiple runs by the same model as independent human evidence.
-4. For a multi-major submission, **reuse the same universal scores** for an unchanged draft and score each major fit separately; disclose per-major trade-offs.
+- **Evaluate**: one statement and one/multiple programme contexts; research each target first.
+- **Compare**: blind A/B rating for the *same* programme, then reverse presentation order where feasible. Discuss meaningful substantive differences beyond cosmetic score noise.
+- **Cross-major**: hold universal scores constant for the exact same draft, research each chosen programme separately, and report programme-specific fit and shared-statement trade-offs.
+- **Benchmark**: run consented/anonymized or synthetic cases, record model/version, prompts, rubric versions, source snapshot/hash, and compare judge disagreements/order reversals. Use `python3 scripts/benchmark.py --input examples/benchmark.synthetic.json`. Agreement is not proof of admissions validity.
 
-## Benchmark mode
+## Structured records and checks
 
-1. Use synthetic or consented anonymized cases, human-rated reference judgements when available, and explicit counterfactual edits (cosmetic vs substantive, major swaps, order swaps).
-2. Record prompts, rubric/profile versions, model names, temperatures where available, random seeds where supported, and exact PS version hashes. Do not claim these settings guarantee reproducibility.
-3. Run `python3 scripts/benchmark.py --input benchmark_results.json` for descriptive disagreement / rank-flip diagnostics. Scores without expert ground truth measure **agreement**, not accuracy or admissions validity.
-4. Run `python3 -m unittest discover -s tests -v` before shipping changes.
+For machine-readable results, follow `references/output-schema.md`; include a dynamically generated `profiles` registry in each evaluation JSON, rather than relying on built-in profile IDs. Then use:
 
-## Additional guidance
+```bash
+python3 scripts/validate_profiles.py --root .
+python3 scripts/aggregate_scores.py --rubrics . --input examples/evaluations.synthetic.json
+python3 -m unittest discover -s tests -v
+```
 
-- Read `references/methodology.md` for anchor interpretations, source hierarchy and fairness.
-- Read `references/output-schema.md` for machine-readable evaluator records and examples.
-- Keep the skill independent of AIOS or any one model provider; no mandatory APIs or paid tools.
+Scripts validate rubric arithmetic and result schema; they do not browse, call an LLM, or verify PS quotations against an original draft. No model, browser access or paid API is bundled by this Skill.
+
+## Privacy and evidence discipline
+
+Do not commit actual PS drafts, identifiable application documents or research reports to public repositories without explicit consent. Treat application essays as confidential by default. Prefer official English-language sources. If unavailable, explain that fit is provisional. Never cite a curriculum page as evidence of a university's secret PS scoring weights. Keep this Skill usable independently of AIOS and of any particular agent provider.
