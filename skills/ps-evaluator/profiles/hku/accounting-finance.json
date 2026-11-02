@@ -1,0 +1,19 @@
+{
+  "id": "hku-accounting-finance", "version": "1.0.0", "verified_on": "2026-11-02", "target_intake": "2027", "university": "The University of Hong Kong", "programme": "Bachelor of Business Administration in Accounting and Finance", "award": "BBA(Acc&Fin)",
+  "official_facts": [
+    "The programme prepares students for professional accounting qualifications and finance leadership.",
+    "The structure includes a professional core in accounting and a required minor in finance, with an option to take a second major in finance.",
+    "Accounting training and finance are both substantive programme components."
+  ],
+  "major_signals": [
+    {"topic": "Accounting judgement and financial reporting", "look_for": "Understanding how classification, measurement or reporting choices affect financial interpretation; correct use of revenue, gross profit and costs."},
+    {"topic": "Finance decisions and risk", "look_for": "Financial reasoning about investment, capital allocation, trade-offs or risk, tied to evidence."},
+    {"topic": "Evidence quality and professional responsibility", "look_for": "Verification of assumptions, correction of analytical errors and appropriately bounded conclusions."}
+  ],
+  "overclaim_warnings": ["Do not equate revenue with gross profit.", "Do not give higher scores merely for mentioning a professional accreditation or a financial institution."],
+  "sources": [
+    {"title": "HKU Admissions: BBA Accounting and Finance", "url": "https://admissions.hku.hk/programmes/undergraduate-programmes/bachelor-of-business-administration-accounting-and-finance", "kind": "official_programme"},
+    {"title": "HKU Business School undergraduate programmes", "url": "https://ug.hkubs.hku.hk/admission/information-day/programmes", "kind": "official_curriculum"}
+  ],
+  "interpretation_note": "major_signals are evaluation heuristics inferred from programme content, not a published admissions marking scheme. Confirm exact 2027 requirements at submission."
+}

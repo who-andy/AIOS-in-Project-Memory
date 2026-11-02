@@ -1,0 +1,18 @@
+{
+  "id": "hkust-economics-finance", "version": "1.0.0", "verified_on": "2026-11-02", "target_intake": "2027", "university": "The Hong Kong University of Science and Technology", "programme": "BSc in Economics and Finance", "award": "BSc(ECOF)",
+  "official_facts": [
+    "The programme emphasises quantitative methods and techniques to understand the modern economy and public policy.",
+    "Its curriculum connects economics with finance, analytical skills and quantitative research.",
+    "Students interested in research may take final-year honours thesis courses."
+  ],
+  "major_signals": [
+    {"topic": "Economic reasoning", "look_for": "Questions about incentives, markets, institutions, economic mechanisms or public policy, supported by reasoning."},
+    {"topic": "Quantitative and empirical analysis", "look_for": "Appropriate use of data, statistical assumptions, measurement, counterexamples and uncertainty."},
+    {"topic": "Finance and economics bridge", "look_for": "A reasoned connection between financial decisions and economic theory or empirical methods, beyond trading success."}
+  ],
+  "overclaim_warnings": ["Trading returns alone do not establish economics interest.", "Do not reward statistical jargon without evidence the applicant understands its limits."],
+  "sources": [
+    {"title": "HKUST Undergraduate Admissions: Economics and Finance", "url": "https://join.hkust.edu.hk/our-programs/school-of-business-and-management/economics-and-finance", "kind": "official_programme"}
+  ],
+  "interpretation_note": "major_signals are evaluation heuristics inferred from programme content, not a published admissions marking scheme. Confirm exact 2027 requirements at submission."
+}
