@@ -1,47 +1,51 @@
-# PS Evaluator Skill v0.1.0
+# PS Evaluator Skill v0.2.0
 
-[中文说明](README.zh-CN.md)
+[简体中文](README.zh-CN.md)
 
-An experimental, **major-aware** undergraduate personal statement evaluator, packaged as a portable Agent Skill for file-capable agents such as Claude Code and Codex. First profiles: HKU BBA Accounting and Finance, HKUST BSc Economics and Finance.
+A portable, **research-first** Agent Skill for undergraduate personal statements. It supports Hong Kong universities and other institutions with one shared scoring workflow. **No university or major is hardcoded.** The agent researches the specific programme's current official requirements and curriculum, and then assesses the essay against that evidence.
 
-**What it does:** evidence-based rubric scoring (70 points universal quality + 30 points programme fit); same-PS cross-major comparison; pairwise version reviews; aggregate/check independent judge scores; descriptive benchmark diagnostics.
+## Why dynamic research?
 
-**What it does not do:** no admission probability estimation, no verified university PS grade, no API call or automatic multi-model orchestration, no claim of psychometric calibration. The agent performs the qualitative judgement; local Python scripts validate and aggregate structured results.
+Universities and routes vary in whether a statement is required, its length, whether multiple programme choices share one essay, and which additional materials are needed. Public curriculum details do not disclose secret internal PS scoring weights. This Skill explicitly distinguishes official facts from inferred programme fit signals.
 
-## Install
+## Workflow
 
-Copy the entire `ps-evaluator` folder to the skill directory used by your agent, for example:
+1. Identify university, exact programme, intake, qualification route and shared-PS programme choices.
+2. Research official English admissions instructions and degree curriculum, recording sources and unknowns. Generate a provisional or verified **research snapshot** for this evaluation, outside the public Skill directory.
+3. Grade common writing quality using the 70-point universal rubric; evaluate each programme's fit against the verified research on a separate 30-point rubric. These weights are experimental and are **not** universities' admissions weights.
+4. Report evidence, risk flags, submission constraints and confidence, without assigning admission probabilities.
+5. Compare drafts, assess cross-major fit or run benchmark tests when asked.
 
-- Codex: `~/.agents/skills/ps-evaluator/` or a project `.agents/skills/ps-evaluator/` (check your Codex release's skill discovery settings).
-- Claude Code: `~/.claude/skills/ps-evaluator/` or `.claude/skills/ps-evaluator/` in a project.
+If official programme context cannot be verified, report a universal-only evaluation and show unknowns instead of inventing programme criteria. Multiple programmes sharing a statement receive identical universal scores for an unchanged essay, plus separate fit analysis.
 
-If installed from an AIOS checkout, only copy the `skills/ps-evaluator` directory. AIOS is **not** required.
+## Installation
 
-Then ask: `Use ps-evaluator to evaluate this PS for HKUST BSc Economics and Finance. Explain your evidence and do not predict admission probability.`
-
-## Commands
+From this repository, install the independent `ps-evaluator` Skill with a compatible Skills CLI:
 
 ```bash
+npx skills add who-andy/AIOS-in-Project-Memory --skill ps-evaluator
+```
+
+Or copy `skills/ps-evaluator/` into a compatible agent's skills directory, such as `~/.agents/skills/ps-evaluator/` (Codex) or `~/.claude/skills/ps-evaluator/` (Claude Code). It does not require AIOS or an API key.
+
+## Example
+
+> Use ps-evaluator to assess this PS for [University], [exact Programme], 2027 international A-Level entry. First research the official admissions rules and curriculum, cite sources, then score writing and programme fit. Check whether this single statement must cover two programme choices.
+
+## Deterministic tests
+
+```bash
+cd skills/ps-evaluator
 python3 scripts/validate_profiles.py --root .
 python3 -m unittest discover -s tests -v
 python3 scripts/aggregate_scores.py --rubrics . --input examples/evaluations.synthetic.json
 python3 scripts/benchmark.py --input examples/benchmark.synthetic.json
 ```
 
-All scripts use the Python 3 standard library. No API key or dependency installation required. These CLI commands are run from this directory. See `references/output-schema.md` for the record format. The example data is **synthetic, for CLI testing only**; do not regard it as an actual model evaluation.
+Python scripts only validate/aggregate model-generated records. They **do not** browse the web, conduct an AI evaluation or prove admissions prediction accuracy. Examples are fully synthetic.
 
-## Major profiles
-
-University curriculum statements and the project's own evaluation signals are intentionally separated. Source URL, verification date, intended intake, and version are in each profile. Recheck official English-language pages at assessment time. Programme fit scores never assume that a finance keyword proves readiness for economics or accounting.
+See [research protocol](references/research-protocol.md), [rubric methodology](references/methodology.md), and [evaluation schema](references/output-schema.md).
 
 ## Privacy
 
-Do not commit actual applicant PS drafts or identifying admission documents. Keep private input/output files outside this public source tree. Reports and records should be shared only with the user's authorization.
-
-## Validation roadmap
-
-v0.1: deterministic schema checks and synthetic regression tests.
-v0.2: human-labelled reference sample with adjudication and more majors.
-v0.3: controlled multi-model assessments and documented agreement metrics.
-
-MIT license is inherited from the host repository when published under that repository.
+Never publish an applicant's real statements or personal details without explicit consent. Save user-specific research snapshots and evaluation reports outside the public Skill repository. The Skill is model-provider independent.

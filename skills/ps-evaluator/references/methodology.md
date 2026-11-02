@@ -1,29 +1,33 @@
-# Scoring methodology and limitations
+# Scoring methodology, scope and limitations
 
 ## Validity boundaries
 
-Scores are **experimental editorial judgements**. There is no evidence that a 90/100 vs 80/100 score maps to a quantifiable change in HKU/HKUST admission probability. Official programme descriptions establish curriculum facts, not PS scoring weights. Judge inferences must be labelled as inferences.
+Scores are **experimental editorial judgements**, not university-issued PS scores or admissions probability predictors. HKU, CUHK, HKUST, CityUHK and PolyU do not publish a common standardized PS marking scale. University-specific or programme-specific unpublished preferences must remain unknown. A curriculum page can support a **disciplinary-fit inference**, but never proves how many admissions points that university awards for a PS.
 
 ## Anchors
 
-For each rubric criterion, judge strength against the 0–4 anchors. Allocate whole-number points between 0 and the criterion maximum using the anchor descriptions as proportional guides; justify interpolation. If evidence is absent, give 0 on that criterion; uncertainty in truthfulness triggers separate verification rather than fabrication. Quote up to two short spans from the PS; give exact quotations or an empty list if absent.
+Use each criterion's 0–4 anchor scale in the two JSON rubrics as a proportional guide for allocating integer scores. Expose evidence and justify interpolation. Absence of evidence is different from evidence of absence. Do not require adversity, failure or prestigious achievements. Don't reward surface terminology, native-like writing, name dropping or exaggerated impact without reasoning.
 
-Do not grant points for mentioning a major's name, a company's prestige, superficial financial jargon, native-like idiom, fashionable AI tools, or exaggerated outcome claims alone. Evaluate intellectual contribution and quality of reasoning. A PS need not feature failure, personal hardship, or extravagant storytelling to score well.
+Universal writing scores should be invariant when a given essay is assessed against multiple majors. Major-fit scores should change only for defensible programme-specific reasons supported by the dynamically researched facts. The 70+30 scheme is a comparative experiment and should not silently be customized based on a guessed school preference.
 
-## Evidence hierarchy
+## Source hierarchy
 
-1. Current English-language official university/programme requirements and curriculum.
-2. Official academic department pages and linked syllabi.
-3. Peer-reviewed admissions/assessment research for *general* assessment methodology, with limits.
-4. Applicant-provided authentic evidence, clearly distinguished from external verification.
-5. AI evaluator interpretation, marked provisional.
+1. Official current admissions instructions for the exact route, year and degree.
+2. Official programme curriculum, programme learning outcomes and faculty/department pages.
+3. Officially published selection criteria, where available, with exact attribution.
+4. Reliable academic assessment research for **general methodology**, never as an HK-specific scoring fact.
+5. AI-generated interpretations, explicitly labelled inferred and lower confidence.
 
-For multiple programme choices, inspect the university's actual submission route and whether a shared PS is required. Never silently generalize another university's word limits.
+Follow `research-protocol.md` before fit scoring. If no reliable official evidence is available, give a universal-only assessment and state that major fit cannot be established. Persist sourced research snapshots only in the user's authorized private workspace.
 
-## High-risk issues
+## Distinct outputs
 
-Report separately from numerical scores: materially wrong definitions; unverified institutional requirement; contradictions between paragraphs; unsupported claims that should be checked by the applicant; fabricated achievements (only if established, never inferred from AI writing style); privacy risks and sensitive data. Flag, don't assert an unverified falsehood.
+- **Submission check**: PS mandatory / optional / unknown, limits, shared-choice rules, route and intake; no guessed rules.
+- **Writing quality**: universal 70-point score, evidence and rationale.
+- **Major fit**: 30-point score only with enough official research; present as provisional when sources incomplete.
+- **Risks**: separately flag possible factual contradictions, unverifiable achievements, terminology errors and privacy issues. Do not accuse the writer of fabrication solely from text.
+- **Admissions significance**: report what official university instructions explicitly say; unknown weights stay unknown.
 
 ## Reliability and benchmarking
 
-A useful internal study tracks intra-rater agreement, inter-rater absolute disagreement, same-major pairwise order reversals, cross-major fit shifts, and sensitivity to cosmetic vs substantive edits. Without external human ratings or admissions data, these are **consistency diagnostics**, not accuracy, calibration, or predictive validity tests. Keep benchmark cases synthetic or explicitly consented and anonymized; do not put the user's private application drafts in GitHub.
+Repeatable tests may measure intra-/inter-judge disagreement, A/B order flips, cross-major sensitivity and cosmetic-vs-substantive-edit sensitivity. Such tests measure consistency or test expected directional properties. Expert human ratings and appropriate outcomes data are still required to assess validity or prediction. Keep fixtures synthetic and real applicant materials private.

@@ -1,6 +1,5 @@
-"""Unit tests for structural validators and descriptive score statistics."""
+"""Unit tests for dynamic research and deterministic score diagnostics."""
 import copy
-import json
 import sys
 import unittest
 from pathlib import Path
@@ -9,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from aggregate_scores import summarize
 from benchmark import diagnose
-from validate_profiles import ValidationError, load_json, validate
+from validate_profiles import ValidationError, load_json, validate, validate_research_profile
 
 
 class ContractTests(unittest.TestCase):
@@ -17,9 +16,9 @@ class ContractTests(unittest.TestCase):
         self.payload = load_json(ROOT / "examples" / "evaluations.synthetic.json")
         self.pairs = load_json(ROOT / "examples" / "benchmark.synthetic.json")
 
-    def test_profiles_and_weights(self):
+    def test_dynamic_no_bundled_profile_required(self):
         got = validate(ROOT)
-        self.assertEqual(got["profiles"], 2)
+        self.assertFalse(got["bundled_profiles_required"])
         self.assertEqual(got["total_points"], 100)
 
     def test_score_aggregation(self):
@@ -28,6 +27,7 @@ class ContractTests(unittest.TestCase):
         self.assertEqual(got["groups"][0]["judge_count"], 2)
         for x in got["evaluations"]:
             self.assertEqual(x["universal"] + x["major_fit"], x["total"])
+            self.assertEqual(x["research_status"], "synthetic")
 
     def test_out_of_range_rejected(self):
         data = copy.deepcopy(self.payload)
@@ -41,7 +41,7 @@ class ContractTests(unittest.TestCase):
         with self.assertRaises(ValidationError):
             summarize(ROOT, data)
 
-    def test_wrong_major_rejected(self):
+    def test_unknown_major_rejected(self):
         data = copy.deepcopy(self.payload)
         data["evaluations"][0]["target_major"] = "nonexistent"
         with self.assertRaises(ValidationError):
@@ -67,6 +67,47 @@ class ContractTests(unittest.TestCase):
     def test_boolean_score_rejected(self):
         p = copy.deepcopy(self.payload)
         p["evaluations"][0]["scores"]["language"]["score"] = True
+        with self.assertRaises(ValidationError):
+            summarize(ROOT, p)
+
+    def test_verified_must_have_evidence(self):
+        p = copy.deepcopy(self.payload)
+        entry = next(iter(p["profiles"].values()))
+        entry["research_status"] = "verified"
+        entry["synthetic"] = False
+        with self.assertRaises(ValidationError):
+            summarize(ROOT, p)
+
+    def test_unavailable_research_requires_universal_only(self):
+        p = copy.deepcopy(self.payload)
+        entry = next(iter(p["profiles"].values()))
+        entry["research_status"] = "unavailable"
+        for e in p["evaluations"]:
+            for key in ("disciplinary_understanding", "relevant_evidence", "academic_direction"):
+                del e["scores"][key]
+        got = summarize(ROOT, p)
+        for x in got["evaluations"]:
+            self.assertIsNone(x["major_fit"])
+            self.assertIsNone(x["total"])
+            self.assertFalse(x["major_profile_checked"])
+
+    def test_unavailable_research_rejects_fabricated_fit(self):
+        p = copy.deepcopy(self.payload)
+        next(iter(p["profiles"].values()))["research_status"] = "unavailable"
+        with self.assertRaises(ValidationError):
+            summarize(ROOT, p)
+
+    def test_malformed_research_date_rejected(self):
+        p = copy.deepcopy(self.payload)
+        entry = next(iter(p["profiles"].values()))
+        entry["researched_on"] = "2026-99-99"
+        with self.assertRaises(ValidationError):
+            summarize(ROOT, p)
+
+    def test_profile_registry_mismatch_rejected(self):
+        p = copy.deepcopy(self.payload)
+        entry = next(iter(p["profiles"].values()))
+        entry["id"] = "different"
         with self.assertRaises(ValidationError):
             summarize(ROOT, p)
 

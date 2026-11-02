@@ -1,12 +1,12 @@
-# Evaluation protocol (manual model testing)
+# Research-first PS evaluation protocol
 
-Use **synthetic** text or applicant-consented anonymized PS drafts only.
+Use synthetic or explicitly consented, anonymized statements only.
 
-1. Before comparing outputs, freeze the Rubric/major profile versions and save the exact prompt and document hash.
-2. Run each model independently with the same target university and major; do not expose the other model's score during initial rating.
-3. Run pairwise comparisons twice with A/B order reversed; note whether the preference flips.
-4. Edit one input at a time: cosmetic prose polishing, a genuinely deeper reflection, and an irrelevant major term insertion. Record which rubric components moved.
-5. Repeat under the second major profile; unchanged universal scores should stay fixed across majors.
-6. Add human ratings only if assessors follow the same guidelines, and report exact qualifications, sample size, adjudication rules and limitations.
-
-No human evaluation and no real multi-model trials are included in v0.1. The bundled JSON examples are synthetic contract fixtures.
+1. Record intake, route, full university and programme title, shared-choice status and retrieved official URLs. Create a research snapshot following `references/research-protocol.md`.
+2. Freeze the programme research snapshot, rubric versions, exact prompt and PS hash before comparing judges or versions.
+3. Assess universal quality under unchanged anchors. Independently evaluate major fit with grounded programme signals and mark source gaps.
+4. For A/B comparison, reverse order. Report preference flips and judge disagreement instead of declaring a numerical difference objective.
+5. Construct controlled variants: a prose polish, substantive added reflection, unsupported course-name insertion, and a switched programme profile. The first should not automatically surpass the second; jargon alone must not inflate fit.
+6. For a shared multi-programme statement, reuse universal scores on the same draft, but independently research and judge each target.
+7. Try no-source conditions: if live official programme information is inaccessible, the evaluator must refuse to fake the major fit and still provide universal-only feedback.
+8. Human-reference studies require disclosed assessor background, sample sizes and limits. This release has no real multi-model validation or verified admissions scoring ground truth.

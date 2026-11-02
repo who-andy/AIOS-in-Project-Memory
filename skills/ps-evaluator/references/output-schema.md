@@ -1,32 +1,58 @@
-# Evaluation records
+# Structured evaluation records (v0.2)
 
-Create one JSON file containing an object with `evaluations` (array). Each entry:
+An evaluation JSON includes a dynamically researched `profiles` registry plus an `evaluations` array. No school profile ships in the Skill. A `target_major` must point to the exact registry key for that university, programme, route and intake.
 
 ```json
 {
-  "document_id": "synthetic-a",
-  "document_sha256": "optional hex sha256 from local PS file",
-  "target_major": "hku-accounting-finance",
-  "judge_id": "model-or-human-label",
-  "judge_version": "specific version if known",
-  "rubric_versions": {"universal": "1.0.0", "major_fit": "1.0.0"},
-  "profile_version": "1.0.0",
-  "scores": {
-    "critical_reflection": {"score": 15, "evidence": ["exact quote"], "rationale": "..."},
-    "evidence_contribution": {"score": 12, "evidence": ["exact quote"], "rationale": "..."},
-    "intellectual_curiosity": {"score": 11, "evidence": ["exact quote"], "rationale": "..."},
-    "narrative": {"score": 8, "evidence": ["exact quote"], "rationale": "..."},
-    "language": {"score": 4, "evidence": ["exact quote"], "rationale": "..."},
-    "authenticity": {"score": 4, "evidence": ["exact quote"], "rationale": "..."},
-    "disciplinary_understanding": {"score": 8, "evidence": ["exact quote"], "rationale": "..."},
-    "relevant_evidence": {"score": 7, "evidence": ["exact quote"], "rationale": "..."},
-    "academic_direction": {"score": 5, "evidence": ["exact quote"], "rationale": "..."}
+  "profiles": {
+    "example-major-2027": {
+      "id": "example-major-2027",
+      "version": "research-v1",
+      "researched_on": "2026-11-02",
+      "target_intake": "2027",
+      "route": "international qualifications",
+      "university": "Example University",
+      "programme": "Example Major",
+      "research_status": "unavailable",
+      "submission": {"ps_status": "unknown", "limit": null, "shared_choices": null},
+      "official_facts": [],
+      "major_signals": [],
+      "sources": [],
+      "unknowns": ["No official sources available"],
+      "interpretation_note": "Universal-only until official information can be reviewed"
+    }
   },
-  "risks": ["claim needs verification"],
-  "major_profile_checked": true
+  "evaluations": [
+    {
+      "document_id": "my-private-document-label",
+      "target_major": "example-major-2027",
+      "judge_id": "model-name",
+      "judge_version": "precise-version-if-known",
+      "rubric_versions": {"universal": "1.0.0", "major_fit": "1.0.0"},
+      "profile_version": "research-v1",
+      "scores": {
+        "critical_reflection": {"score": 0, "evidence": [], "rationale": "No relevant reasoning in supplied draft"},
+        "evidence_contribution": {"score": 0, "evidence": [], "rationale": "No specific role shown"},
+        "intellectual_curiosity": {"score": 0, "evidence": [], "rationale": "No independent investigation shown"},
+        "narrative": {"score": 0, "evidence": [], "rationale": "No coherent argument"},
+        "language": {"score": 0, "evidence": [], "rationale": "Draft not provided"},
+        "authenticity": {"score": 0, "evidence": [], "rationale": "No personal perspective available"}
+      },
+      "risks": ["Programme fit cannot be assessed without official sources"]
+    }
+  ]
 }
 ```
 
-`aggregate_scores.py` rejects unknown criteria, missing required scores, non-integer or out-of-range scores, missing rationale, and unverifiable profile IDs. It computes subtotals deterministically. It does not run language models, validate whether a quotation appears in the original PS, or establish admission likelihood.
+Above is a schema illustration only; do not score a nonexistent document. See `examples/evaluations.synthetic.json` for parser fixtures.
 
-Benchmark input is a separate JSON object with `observations`: `{ "case_id": ..., "judge_id": ..., "version_id": ..., "order": "AB" | "BA", "preferred": "A" | "B" | "tie", "score_a": 0..100, "score_b": 0..100 }`. `preferred` always refers to canonical document IDs A and B, even after an order swap. For valid paired AB/BA observations from the same judge/version, the tool reports preference reversals; without both orders it reports insufficient coverage. It also aggregates absolute disagreement across judges for the same `case_id` and `version_id` when scores are present.
+### Profile status and outputs
+
+- `verified`: sources + official facts + inferred major signals are present and applicable. Program fit may be scored, but does **not** establish official weights or correctness of the AI judgement.
+- `partial`: some official sources exist; programme fit can be scored only with clearly marked provisional limitations.
+- `unavailable`: universal-only record, omit all three major-fit score keys. `major_fit` and `total` are reported as `null` by the aggregator.
+- `synthetic`: only for unit-test fixtures, requires `synthetic: true` and is always unverified.
+
+Every scored criterion must contain integer `score` in range, `rationale`, and `evidence` array of at most two exact short quotations (or [] if absent). `aggregate_scores.py` validates structure and computes sums but **cannot** check external source accuracy, validate that quotations came from the PS, or test admissions prediction validity.
+
+Benchmark inputs are separate JSON `observations` with `{case_id, judge_id, version_id, order: 'AB'|'BA', preferred: 'A'|'B'|'tie', score_a, score_b}`. Preferred A and B refer to canonical documents regardless of display order.
