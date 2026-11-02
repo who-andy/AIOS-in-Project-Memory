@@ -1,0 +1,125 @@
+{
+  "evaluations": [
+    {
+      "document_id": "example-synthetic-ps",
+      "target_major": "hkust-economics-finance",
+      "judge_id": "synthetic-j1",
+      "judge_version": "fixture-v1",
+      "rubric_versions": {
+        "universal": "1.0.0",
+        "major_fit": "1.0.0"
+      },
+      "profile_version": "1.0.0",
+      "scores": {
+        "critical_reflection": {
+          "score": 16,
+          "evidence": [],
+          "rationale": "Synthetic placeholder for parser testing; no PS examined."
+        },
+        "evidence_contribution": {
+          "score": 12,
+          "evidence": [],
+          "rationale": "Synthetic placeholder for parser testing; no PS examined."
+        },
+        "intellectual_curiosity": {
+          "score": 12,
+          "evidence": [],
+          "rationale": "Synthetic placeholder for parser testing; no PS examined."
+        },
+        "narrative": {
+          "score": 8,
+          "evidence": [],
+          "rationale": "Synthetic placeholder for parser testing; no PS examined."
+        },
+        "language": {
+          "score": 4,
+          "evidence": [],
+          "rationale": "Synthetic placeholder for parser testing; no PS examined."
+        },
+        "authenticity": {
+          "score": 4,
+          "evidence": [],
+          "rationale": "Synthetic placeholder for parser testing; no PS examined."
+        },
+        "disciplinary_understanding": {
+          "score": 9,
+          "evidence": [],
+          "rationale": "Synthetic placeholder for parser testing; no PS examined."
+        },
+        "relevant_evidence": {
+          "score": 8,
+          "evidence": [],
+          "rationale": "Synthetic placeholder for parser testing; no PS examined."
+        },
+        "academic_direction": {
+          "score": 6,
+          "evidence": [],
+          "rationale": "Synthetic placeholder for parser testing; no PS examined."
+        }
+      },
+      "risks": [],
+      "major_profile_checked": false
+    },
+    {
+      "document_id": "example-synthetic-ps",
+      "target_major": "hkust-economics-finance",
+      "judge_id": "synthetic-j2",
+      "judge_version": "fixture-v1",
+      "rubric_versions": {
+        "universal": "1.0.0",
+        "major_fit": "1.0.0"
+      },
+      "profile_version": "1.0.0",
+      "scores": {
+        "critical_reflection": {
+          "score": 15,
+          "evidence": [],
+          "rationale": "Synthetic placeholder for parser testing; no PS examined."
+        },
+        "evidence_contribution": {
+          "score": 11,
+          "evidence": [],
+          "rationale": "Synthetic placeholder for parser testing; no PS examined."
+        },
+        "intellectual_curiosity": {
+          "score": 11,
+          "evidence": [],
+          "rationale": "Synthetic placeholder for parser testing; no PS examined."
+        },
+        "narrative": {
+          "score": 7,
+          "evidence": [],
+          "rationale": "Synthetic placeholder for parser testing; no PS examined."
+        },
+        "language": {
+          "score": 3,
+          "evidence": [],
+          "rationale": "Synthetic placeholder for parser testing; no PS examined."
+        },
+        "authenticity": {
+          "score": 3,
+          "evidence": [],
+          "rationale": "Synthetic placeholder for parser testing; no PS examined."
+        },
+        "disciplinary_understanding": {
+          "score": 8,
+          "evidence": [],
+          "rationale": "Synthetic placeholder for parser testing; no PS examined."
+        },
+        "relevant_evidence": {
+          "score": 7,
+          "evidence": [],
+          "rationale": "Synthetic placeholder for parser testing; no PS examined."
+        },
+        "academic_direction": {
+          "score": 5,
+          "evidence": [],
+          "rationale": "Synthetic placeholder for parser testing; no PS examined."
+        }
+      },
+      "risks": [],
+      "major_profile_checked": false
+    }
+  ],
+  "note": "Purely synthetic fixture; empty evidence intentionally included and should not model actual evaluations."
+}

@@ -1,0 +1,9 @@
+{
+  "note": "Synthetic CLI fixture, not observed LLM or human evaluations.",
+  "observations": [
+    {"case_id": "synthetic-case", "version_id": "v1", "judge_id": "synthetic-judge-1", "order": "AB", "preferred": "A", "score_a": 84, "score_b": 76},
+    {"case_id": "synthetic-case", "version_id": "v1", "judge_id": "synthetic-judge-1", "order": "BA", "preferred": "A", "score_a": 83, "score_b": 77},
+    {"case_id": "synthetic-case", "version_id": "v1", "judge_id": "synthetic-judge-2", "order": "AB", "preferred": "B", "score_a": 79, "score_b": 80},
+    {"case_id": "synthetic-case", "version_id": "v1", "judge_id": "synthetic-judge-2", "order": "BA", "preferred": "A", "score_a": 82, "score_b": 78}
+  ]
+}
